@@ -17,7 +17,7 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
     "Microsoft.EntityFrameworkCore.Design": {
-      "version": "1.0.0-preview2-final",
+      "version": "2.2.6",
       "type": "build"
     }
   },

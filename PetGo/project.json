@@ -4,7 +4,6 @@
       "version": "2.0.0",
       "type": "platform"
     },
-    "Microsoft.NETStandard": "2.0.0",
     "Microsoft.AspNetCore.SpaServices": "1.1.0",
     "Microsoft.AspNetCore.Mvc.RazorPages": "2.0.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",

@@ -4,7 +4,6 @@
       "version": "1.0",
       "type": "platform"
     },
-    "Microsoft.AspNetCore": "4.6.1",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",

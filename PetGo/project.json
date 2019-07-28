@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "Microsoft.NETCore.App": {
-      "version": "2.2",
+      "version": "2.2.104",
       "type": "platform"
     },
     "Microsoft.AspNetCore.Mvc": "1.0.0",

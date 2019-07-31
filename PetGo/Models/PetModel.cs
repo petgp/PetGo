@@ -5,19 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PetGo.Models
 {
-    public class PetContext : DbContext
-    {
+    public class PetContext : DbContext {
         public DbSet<Pet> Pets { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)   {
             optionsBuilder.UseSqlite("Data source=db.db");
         }
-
     }
 
-    public class Pet
-    {
+    public class Pet    {
         [Key]
         public int id { get; set; }
         public int ower_id { get; set; }
@@ -27,7 +22,5 @@ namespace PetGo.Models
         public string breed { get; set; }
         public int age { get; set; }
         public int ownership_length { get; set; }
-
-
     }
 }

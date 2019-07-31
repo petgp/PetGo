@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PetGo.SQLite;
+using PetGo.Models;
 namespace PetGo {
     public class Startup {
         public Startup (IConfiguration configuration) {

@@ -14,13 +14,13 @@ namespace PetGo.Models
 
     public class Pet    {
         [Key]
-        public int id { get; set; }
-        public int ower_id { get; set; }
-        public string name { get; set; }
-        public string type { get; set; }
-        public string img_url { get; set; }
-        public string breed { get; set; }
-        public int age { get; set; }
-        public int ownership_length { get; set; }
+        public int Id { get; set; }
+        public int Owner_id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string Img_url { get; set; }
+        public string Breed { get; set; }
+        public int Age { get; set; }
+        public int Ownership_length { get; set; }
     }
 }

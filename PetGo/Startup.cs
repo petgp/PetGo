@@ -4,28 +4,26 @@ using System;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 //using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 //using Microsoft.AspNetCore.Cors;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-<<<<<<< HEAD
+using Microsoft.IdentityModel.Tokens;
 //using Microsoft.Extensions.Logging;
 //using Microsoft.Extensions.Options;
 //using Microsoft.EntityFrameworkCore.SqlServer;
-using MySql.Data.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PetGo.SQLite;
+using MySql.Data.EntityFrameworkCore;
 using PetGo.Models;
+using PetGo.SQLite;
 //angular
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using System.Data.SqlClient;
-
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace PetGo {
     public class Startup {
@@ -39,11 +37,11 @@ namespace PetGo {
         public void ConfigureServices (IServiceCollection services) {
 
             //Injecting AppSettings.JSON
-            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            services.Configure<ApplicationSettings> (Configuration.GetSection ("ApplicationSettings"));
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
 
             //grabbing connection string for authcontext
-            services.AddDbContext<AuthenticationContext>(options => options.UseMySQL(Configuration.GetConnectionString("IdentityConnection")));
+            services.AddDbContext<AuthenticationContext> (options => options.UseMySQL (Configuration.GetConnectionString ("IdentityConnection")));
 
             //create default identity db
             //try
@@ -58,12 +56,11 @@ namespace PetGo {
             //    Console.WriteLine("exception " + ex.Message);
             //}
 
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<AuthenticationContext>()
-                .AddDefaultTokenProviders();
+            services.AddDefaultIdentity<ApplicationUser> ()
+                .AddEntityFrameworkStores<AuthenticationContext> ()
+                .AddDefaultTokenProviders ();
 
-            services.Configure<IdentityOptions>(options =>
-            {
+            services.Configure<IdentityOptions> (options => {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
@@ -76,25 +73,22 @@ namespace PetGo {
 
             //jwt Authentication
 
-            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());;
-            services.AddAuthentication(x =>
-            {
+            var key = Encoding.UTF8.GetBytes (Configuration["ApplicationSettings:JWT_Secret"].ToString ());;
+            services.AddAuthentication (x => {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
+            }).AddJwtBearer (x => {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = false;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
+                x.TokenValidationParameters = new TokenValidationParameters {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey (key),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ClockSkew = TimeSpan.Zero
                 };
-            }
-                );
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles (configuration => {
@@ -105,10 +99,9 @@ namespace PetGo {
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
 
-            app.Use(async (ctx, next) => {
-                await next();
-                if (ctx.Response.StatusCode == 204)
-                {
+            app.Use (async (ctx, next) => {
+                await next ();
+                if (ctx.Response.StatusCode == 204) {
                     ctx.Response.ContentLength = 0;
                 }
             });
@@ -124,7 +117,7 @@ namespace PetGo {
             //builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
             //.AllowAnyHeader()
             //.AllowAnyMethod());
-            app.UseAuthentication();
+            app.UseAuthentication ();
             app.UseHttpsRedirection ();
             app.UseStaticFiles ();
             app.UseSpaStaticFiles ();

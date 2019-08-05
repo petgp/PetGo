@@ -4,15 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 //added for allowanonymous
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD:PetGo/Controllers/Users.cs
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using PetGo.SQLite;
 
 namespace PetGo.Controllers {
     [Route ("api/users")]
     public class Users : Controller {
-
 
         //[HttpGet ("")]
         //public IEnumerable<User> GetUsers () {

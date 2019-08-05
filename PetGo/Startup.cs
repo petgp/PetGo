@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+<<<<<<< HEAD
 //using Microsoft.Extensions.Logging;
 //using Microsoft.Extensions.Options;
 //using Microsoft.EntityFrameworkCore.SqlServer;
@@ -24,6 +25,7 @@ using PetGo.Models;
 //angular
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using System.Data.SqlClient;
+
 
 namespace PetGo {
     public class Startup {

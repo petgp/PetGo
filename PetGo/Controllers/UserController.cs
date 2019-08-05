@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 //added for allowanonymous
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+<<<<<<< HEAD:PetGo/Controllers/Users.cs
 using Microsoft.AspNetCore.Identity;
 using PetGo.SQLite;
 

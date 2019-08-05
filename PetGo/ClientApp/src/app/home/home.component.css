@@ -1,0 +1,8 @@
+.side_bar{
+  position: absolute;
+  background-color: grey;
+  width: 230px;
+  height: 100%;
+  left: 0px;
+  margin-top: -16px;
+}

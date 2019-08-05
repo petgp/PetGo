@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetGo.Models;
 
-namespace PetGo.Migrations
+namespace PetGo.Migrations.Authentication
 {
     [DbContext(typeof(AuthenticationContext))]
     partial class AuthenticationContextModelSnapshot : ModelSnapshot

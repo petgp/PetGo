@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetGo.Models;
 
-namespace PetGo.Migrations
+namespace PetGo.Migrations.Authentication
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20190802053124_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190805023531_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

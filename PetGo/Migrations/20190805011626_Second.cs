@@ -5,8 +5,11 @@ namespace PetGo.Migrations
 {
     public partial class Second : Migration
     {
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            //call Down to drop the tables first might not want this later
+            Down(migrationBuilder);
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new

@@ -21,7 +21,7 @@ namespace PetGo.Migrations
                     b.Property<string>("Id")
                         .HasMaxLength(85)
                         .ValueGeneratedOnAdd();
-                        
+
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken().HasMaxLength(85);

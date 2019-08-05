@@ -9,8 +9,8 @@ using PetGo.Models;
 namespace PetGo.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20190802053124_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190805011626_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -187,14 +187,6 @@ namespace PetGo.Migrations
             modelBuilder.Entity("PetGo.SQLite.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("EmergencyName");
-
-                    b.Property<string>("EmergencyNumber");
-
-                    b.Property<string>("EventCode");
 
                     b.Property<string>("FullName");
 

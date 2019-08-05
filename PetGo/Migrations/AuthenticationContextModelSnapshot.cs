@@ -19,16 +19,18 @@ namespace PetGo.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
+                        .HasMaxLength(85)
                         .ValueGeneratedOnAdd();
+                        
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken().HasMaxLength(85);
 
                     b.Property<string>("Name")
-                        .HasMaxLength(256);
+                        .HasMaxLength(85);
 
                     b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
+                        .HasMaxLength(85);
 
                     b.HasKey("Id");
 
@@ -42,7 +44,8 @@ namespace PetGo.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(85);
 
                     b.Property<string>("ClaimType");
 
@@ -61,7 +64,7 @@ namespace PetGo.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd().HasMaxLength(128);
 
                     b.Property<int>("AccessFailedCount");
 
@@ -72,7 +75,7 @@ namespace PetGo.Migrations
                         .IsRequired();
 
                     b.Property<string>("Email")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -81,10 +84,10 @@ namespace PetGo.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.Property<string>("PasswordHash");
 
@@ -97,7 +100,7 @@ namespace PetGo.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
@@ -185,14 +188,6 @@ namespace PetGo.Migrations
             modelBuilder.Entity("PetGo.SQLite.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("EmergencyName");
-
-                    b.Property<string>("EmergencyNumber");
-
-                    b.Property<string>("EventCode");
 
                     b.Property<string>("FullName");
 

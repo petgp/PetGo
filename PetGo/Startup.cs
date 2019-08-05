@@ -4,6 +4,7 @@ using System;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -13,11 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 //using Microsoft.AspNetCore.Cors;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 //using Microsoft.Extensions.Logging;
 //using Microsoft.Extensions.Options;
 //using Microsoft.EntityFrameworkCore.SqlServer;
-using MySql.Data.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PetGo.SQLite;
 using PetGo.Models;
@@ -42,19 +41,6 @@ namespace PetGo {
 
             //grabbing connection string for authcontext
             services.AddDbContext<AuthenticationContext>(options => options.UseMySQL(Configuration.GetConnectionString("IdentityConnection")));
-
-            //create default identity db
-            //try
-            //{
-            //    using (SqlConnection conn = new SqlConnection(Configuration.GetConnectionString("IdentityConnection")))
-            //    {
-            //        Console.WriteLine("Bryan Rockes");
-            //    }
-            //}
-            //catch( Exception ex)
-            //{
-            //    Console.WriteLine("exception " + ex.Message);
-            //}
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthenticationContext>()

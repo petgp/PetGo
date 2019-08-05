@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace PetGo.SQLite {
     public class Program {
         public static void Main (string[] args) {
+  
+
             //using (var db = new UserContext ()) {
             //    db.Users.Add (new User {
             //        name = "Bryan Stevens",

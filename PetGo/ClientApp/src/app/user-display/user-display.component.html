@@ -1,3 +1,45 @@
-<p>
-  user-display works!
-</p>
+<p *ngIf="!users"><em>Loading...</em></p>
+<div *ngFor="let user of users" class="card mb-3" style="max-width: 540px;" id="users">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ user.name }}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+          This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class='table table-striped' *ngIf="users">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Country</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.address }}</td>
+      <td>{{ user.city }}</td>
+      <td>{{ user.state }}</td>
+      <td>{{ user.zip }}</td>
+      <td>{{ user.country }}</td>
+      <td><a routerLink="/users/{{user.id}}">Edit</a></td>
+    </tr>
+  </tbody>
+</table>

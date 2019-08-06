@@ -1,14 +1,22 @@
-<ul>
-  <a [routerLink]='["/users"]'>
-    <li>Users</li>
-  </a>
-  <a [routerLink]='["/pets"]'>
-    <li>Pets</li>
-  </a>
-  <a [routerLink]='["/listings"]'>
-    <li>Listings</li>
-  </a>
-  <a [routerLink]='["/messages"]'>
-    <li>Messages</li>
-  </a>
-</ul>
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist" ng-controller="ButtonsCtrl">
+      <a [routerLink]='["/users"]'
+        class="list-group-item list-group-item-action" id="list-home-list"
+        role="tab"
+        aria-controls="users">Users</a>
+      <a [routerLink]='["/pets"]'
+      class="list-group-item list-group-item-action" id="list-home-list"
+        role="tab"
+        aria-controls="pets">Pets</a>
+      <a [routerLink]='["/listings"]'
+      class="list-group-item list-group-item-action" id="list-home-list"
+        role="tab"
+        aria-controls="listings">Listings</a>
+      <a [routerLink]='["/messages"]'
+      class="list-group-item list-group-item-action" id="list-home-list"
+        role="tab"
+        aria-controls="messages">Messages</a>
+    </div>
+  </div>
+</div>

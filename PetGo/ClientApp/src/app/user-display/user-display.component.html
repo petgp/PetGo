@@ -1,8 +1,15 @@
 <p *ngIf="!users"><em>Loading...</em></p>
 <div *ngFor="let user of users" class="card mb-3" style="max-width: 540px;" id="users">
-  <div class="row no-gutters">
+    <div class="card">
+        <div class="card-body text-center">
+            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+            <h4 class="card-title">{{ user.name }}</h4>
+            <p class="card-text">{{ user.email }}</p>
+            <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus">Edit</i></a>
+        </div>
+    </div>
+  <!-- <div class="row no-gutters">
     <div class="col-md-4">
-      <img src="..." class="card-img" alt="...">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -10,36 +17,9 @@
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
           This content is a little bit longer.</p>
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <a routerLink="/users/{{user.id}}">Edit</a>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
-<table class='table table-striped' *ngIf="users">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-      <th>Country</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.id }}</td>
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.address }}</td>
-      <td>{{ user.city }}</td>
-      <td>{{ user.state }}</td>
-      <td>{{ user.zip }}</td>
-      <td>{{ user.country }}</td>
-      <td><a routerLink="/users/{{user.id}}">Edit</a></td>
-    </tr>
-  </tbody>
-</table>

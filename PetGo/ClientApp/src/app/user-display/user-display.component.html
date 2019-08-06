@@ -1,25 +1,12 @@
 <p *ngIf="!users"><em>Loading...</em></p>
-<div *ngFor="let user of users" class="card mb-3" style="max-width: 540px;" id="users">
+<div *ngFor="let user of users" class="card mb-3" id="users">
     <div class="card">
         <div class="card-body text-center">
-            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+            <p><img class=" img-fluid" src="https://media.licdn.com/dms/image/C5603AQHfOTI0Um2Nqg/profile-displayphoto-shrink_200_200/0?e=1570665600&v=beta&t=HG1Zrj4jNBaBcOkrH1ml5iY2_TWcnirqwDVQLiRv1Bw" alt="card image"></p>
             <h4 class="card-title">{{ user.name }}</h4>
             <p class="card-text">{{ user.email }}</p>
             <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus">Edit</i></a>
         </div>
     </div>
-  <!-- <div class="row no-gutters">
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ user.name }}</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-          This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        <a routerLink="/users/{{user.id}}">Edit</a>
-      </div>
-    </div>
-  </div> -->
 </div>
 

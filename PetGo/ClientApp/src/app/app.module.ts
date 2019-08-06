@@ -14,6 +14,8 @@ import { UserDisplayComponent } from './user-display/user-display.component';
 import { PetDisplayComponent } from './pet-display/pet-display.component';
 import { ListingDisplayComponent } from './listing-display/listing-display.component';
 import { MessageDisplayComponent } from './message-display/message-display.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -26,16 +28,19 @@ import { MessageDisplayComponent } from './message-display/message-display.compo
     UserDisplayComponent,
     PetDisplayComponent,
     ListingDisplayComponent,
-    MessageDisplayComponent
+    MessageDisplayComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', redirectTo: '/users', pathMatch: 'full'},
       { path: 'counter', component: CounterComponent },
-      { path: 'login', component: FetchDataComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
       { path: 'users', component: UserDisplayComponent },
       { path: 'pets', component: PetDisplayComponent },
       { path: 'listings', component: ListingDisplayComponent },

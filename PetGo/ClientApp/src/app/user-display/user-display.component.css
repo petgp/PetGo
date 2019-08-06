@@ -12,3 +12,7 @@
   max-width: 370px !important;
   min-width: 370px !important;
 }
+.card-body>p>img{
+  width: 120px;
+  border-radius:50%;
+}

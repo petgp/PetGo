@@ -10,7 +10,6 @@ export class UserDisplayComponent {
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Users[]>(baseUrl + 'api/users').subscribe(result => {
-      console.log('HELLO RESULTS', result)
       this.users = result;
     }, error => console.error(error));
   }

@@ -34,8 +34,22 @@ namespace PetGo {
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices (IServiceCollection services) {
 
+        public void ConfigureServices (IServiceCollection services) {
+            using (var db = new UserContext ()) {
+                db.Users.Add (new User {
+                    Name = "Bryan Stevens",
+                        Email = "bryan_stevens314@yahoo.com"
+                });
+                var count = db.SaveChanges ();
+                Console.WriteLine ("{0} records saved to database", count);
+
+                Console.WriteLine ();
+                Console.WriteLine ("All blogs in database:");
+                foreach (var user in db.Users) {
+                    Console.WriteLine (" - {0}", user.Name);
+                }
+            }
             //Injecting AppSettings.JSON
             services.Configure<ApplicationSettings> (Configuration.GetSection ("ApplicationSettings"));
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);

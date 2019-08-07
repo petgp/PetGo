@@ -1,0 +1,18 @@
+:host{
+  display: flex;
+  flex-wrap: wrap;
+  width: 78%;
+  float: right;
+  right: 0px;
+  top: 75px;
+  position: absolute;
+}
+.mb-3{
+  margin:0 auto;
+  max-width: 370px !important;
+  min-width: 370px !important;
+}
+.card-body>p>img{
+  width: 120px;
+  border-radius:50%;
+}

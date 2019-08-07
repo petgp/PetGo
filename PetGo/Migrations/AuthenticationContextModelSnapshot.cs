@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetGo.Models;
 
-namespace PetGo.Migrations.Authentication
+namespace PetGo.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20190805023531_Initial")]
-    partial class Initial
+    partial class AuthenticationContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,14 +185,6 @@ namespace PetGo.Migrations.Authentication
             modelBuilder.Entity("PetGo.SQLite.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("EmergencyName");
-
-                    b.Property<string>("EmergencyNumber");
-
-                    b.Property<string>("EventCode");
 
                     b.Property<string>("FullName");
 

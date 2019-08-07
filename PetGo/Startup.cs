@@ -36,52 +36,13 @@ namespace PetGo {
         // This method gets called by the runtime. Use this method to add services to the container.
 
         public void ConfigureServices (IServiceCollection services) {
-            using (var db = new UserContext ()) {
-                db.Users.Add (new User {
-                    Name = "Bryan Stevens",
-                        Email = "bryan_stevens314@yahoo.com"
-                });
-                var count = db.SaveChanges ();
-                Console.WriteLine ("{0} records saved to database", count);
 
-                Console.WriteLine ();
-                Console.WriteLine ("All blogs in database:");
-                foreach (var user in db.Users) {
-                    Console.WriteLine (" - {0}", user.Name);
-                }
-            }
-            //Injecting AppSettings.JSON
             services.Configure<ApplicationSettings> (Configuration.GetSection ("ApplicationSettings"));
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
 
-            //grabbing connection string for authcontext
-            services.AddDbContext<AuthenticationContext> (options => options.UseMySQL (Configuration.GetConnectionString ("IdentityConnection")));
-
-            <<
-            <<
-            <<< HEAD
             services.AddDefaultIdentity<ApplicationUser> ()
                 .AddEntityFrameworkStores<AuthenticationContext> ()
                 .AddDefaultTokenProviders ();
-            //create default identity db
-            //try
-            //{
-            //    using (SqlConnection conn = new SqlConnection(Configuration.GetConnectionString("IdentityConnection")))
-            //    {
-            //        Console.WriteLine("Bryan Rockes");
-            //    }
-            //}
-            //catch( Exception ex)
-            //{
-            //    Console.WriteLine("exception " + ex.Message);
-            //}
-
-            services.AddDefaultIdentity<ApplicationUser> ()
-                .AddEntityFrameworkStores<AuthenticationContext> ()
-                .AddDefaultTokenProviders (); >>
-            >>
-            >>> master
-
             services.Configure<IdentityOptions> (options => {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -90,8 +51,6 @@ namespace PetGo {
                 options.Password.RequiredLength = 4;
 
             });
-
-            //services.AddCors(); //this for cross origin, but since this is mvc, we don't need it
 
             //jwt Authentication
 
@@ -135,10 +94,6 @@ namespace PetGo {
                 app.UseHsts ();
             }
 
-            //app.UseCors(builder =>
-            //builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
-            //.AllowAnyHeader()
-            //.AllowAnyMethod());
             app.UseAuthentication ();
             app.UseHttpsRedirection ();
             app.UseStaticFiles ();

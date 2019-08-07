@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PetGo.Migrations.Authentication
+namespace PetGo.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,11 +41,7 @@ namespace PetGo.Migrations.Authentication
                     LockoutEnabled = table.Column<short>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
-                    FullName = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
-                    EmergencyName = table.Column<string>(nullable: true),
-                    EmergencyNumber = table.Column<string>(nullable: true),
-                    EventCode = table.Column<string>(nullable: true)
+                    FullName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

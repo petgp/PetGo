@@ -11,11 +11,9 @@ using System.Text;
 namespace PetGo.SQLite {
     public class ApplicationUser : IdentityUser
     {
+        //fields to add, custom
         public string FullName { get; set; }
-        public string Address { get; set; }
-        public string EmergencyName { get; set; }
-        public string EmergencyNumber { get; set; }
-        public string EventCode { get; set; }
+
     }
 
   //  public DbSet<User> Users { get; set; }

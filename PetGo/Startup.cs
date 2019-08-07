@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 //using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 //using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 //using Microsoft.Extensions.Logging;
 //using Microsoft.Extensions.Options;
@@ -37,30 +37,12 @@ namespace PetGo {
 
         public void ConfigureServices (IServiceCollection services) {
 
-            //Injecting AppSettings.JSON
             services.Configure<ApplicationSettings> (Configuration.GetSection ("ApplicationSettings"));
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
-
-            //grabbing connection string for authcontext
-            services.AddDbContext<AuthenticationContext> (options => options.UseMySQL (Configuration.GetConnectionString ("IdentityConnection")));
-
-            //create default identity db
-            //try
-            //{
-            //    using (SqlConnection conn = new SqlConnection(Configuration.GetConnectionString("IdentityConnection")))
-            //    {
-            //        Console.WriteLine("Bryan Rockes");
-            //    }
-            //}
-            //catch( Exception ex)
-            //{
-            //    Console.WriteLine("exception " + ex.Message);
-            //}
 
             services.AddDefaultIdentity<ApplicationUser> ()
                 .AddEntityFrameworkStores<AuthenticationContext> ()
                 .AddDefaultTokenProviders ();
-
             services.Configure<IdentityOptions> (options => {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -69,8 +51,6 @@ namespace PetGo {
                 options.Password.RequiredLength = 4;
 
             });
-
-            //services.AddCors(); //this for cross origin, but since this is mvc, we don't need it
 
             //jwt Authentication
 
@@ -114,10 +94,6 @@ namespace PetGo {
                 app.UseHsts ();
             }
 
-            //app.UseCors(builder =>
-            //builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
-            //.AllowAnyHeader()
-            //.AllowAnyMethod());
             app.UseAuthentication ();
             app.UseHttpsRedirection ();
             app.UseStaticFiles ();

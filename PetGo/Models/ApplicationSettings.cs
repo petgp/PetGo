@@ -7,6 +7,7 @@ namespace PetGo.Models
 {
     public class ApplicationSettings
     {
+        //settings in startup
         public string JWT_Secret { get; set; }
         public string Client_URL { get; set; }
     }

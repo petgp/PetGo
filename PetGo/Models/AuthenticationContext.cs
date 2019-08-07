@@ -11,6 +11,7 @@ namespace PetGo.Models
 {
     public class AuthenticationContext : IdentityDbContext
     {
+        //creating Applicationusers Model
         public AuthenticationContext(DbContextOptions options): base(options)
         {
 

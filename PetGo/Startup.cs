@@ -44,11 +44,11 @@ namespace PetGo {
             services.AddDbContext<AuthenticationContext> (options => options.UseMySQL (Configuration.GetConnectionString ("IdentityConnection")));
 
             <<
-            <<<<< HEAD
+            <<
+            <<< HEAD
             services.AddDefaultIdentity<ApplicationUser> ()
                 .AddEntityFrameworkStores<AuthenticationContext> ()
-                .AddDefaultTokenProviders (); ==
-            == == =
+                .AddDefaultTokenProviders ();
             //create default identity db
             //try
             //{
@@ -65,7 +65,8 @@ namespace PetGo {
             services.AddDefaultIdentity<ApplicationUser> ()
                 .AddEntityFrameworkStores<AuthenticationContext> ()
                 .AddDefaultTokenProviders (); >>
-            >>>>> master
+            >>
+            >>> master
 
             services.Configure<IdentityOptions> (options => {
                 options.Password.RequireDigit = false;

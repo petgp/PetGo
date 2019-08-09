@@ -12,11 +12,11 @@ namespace PetGo.Controllers {
     [Route ("api/users")]
     public class Users : Controller {
 
-        [HttpGet ("")]
-        public IEnumerable<User> GetUsers () {
-            using (var db = new UserContext ()) {
-                return db.Users.ToList ();
-            }
-        }
+        // [HttpGet ("")]
+        // public IEnumerable<User> GetUsers () {
+        //     using (var db = new data ()) {
+        //         return db.Users.ToList ();
+        //     }
+        // }
     }
 }

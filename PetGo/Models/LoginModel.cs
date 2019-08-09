@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PetGo.Models
-{
-    public class LoginModel
-    {
+﻿namespace PetGo.Models {
+    public class LoginModel {
         // just for logging in
         public string Email { get; set; }
         public string Password { get; set; }

@@ -3,16 +3,9 @@ using System.ComponentModel.DataAnnotations;
 //Annotations for key
 using Microsoft.EntityFrameworkCore;
 
-namespace PetGo.Models
-{
-    public class PetContext : DbContext {
-        public DbSet<Pet> Pets { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)   {
-            optionsBuilder.UseSqlite("Data source=db.db");
-        }
-    }
+namespace PetGo.Models {
 
-    public class Pet    {
+    public class Pet {
         [Key]
         public int Id { get; set; }
         public int Owner_id { get; set; }

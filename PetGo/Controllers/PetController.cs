@@ -8,18 +8,23 @@ using PetGo.Models;
 namespace PetGo.Controllers {
     [Route ("api/pets")]
     public class PetController : Controller {
-        // [HttpGet]
-        // public IEnumerable<Pet> GetPets () {
-        //     try {
-        //         using (var db = new PetContext ()) {
-        //             Response.StatusCode = 200;
-        //             return db.Pets.ToList ();
-        //         }
-        //     } catch {
-        //         Response.StatusCode = 422;
-        //         return Enumerable.Empty<Pet> ();
-        //     }
-        // }
+        [HttpGet]
+        public IEnumerable<Pet> GetPets()
+        {
+            try
+            {
+                using (var db = new DatabaseContext())
+                {
+                    Response.StatusCode = 200;
+                    return db.Pets.ToList();
+                }
+            }
+            catch
+            {
+                Response.StatusCode = 422;
+                return Enumerable.Empty<Pet>();
+            }
+        }
 
         // [HttpPost]
         // public IActionResult PostPet ([FromBody] string payload) {

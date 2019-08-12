@@ -9,18 +9,23 @@ namespace PetGo.Controllers {
     [Route ("api/breeds")]
     public class BreedController : Controller {
 
-        // [HttpGet]
-        // public IEnumerable<Breed> GetBreeds () {
-        //     try {
-        //         using (var db = new BreedContext ()) {
-        //             Response.StatusCode = 200;
-        //             return db.Breeds.ToList ();
-        //         }
-        //     } catch {
-        //         Response.StatusCode = 422;
-        //         return Enumerable.Empty<Breed> ();
-        //     }
-        // }
+        [HttpGet]
+        public IEnumerable<Breed> getbreeds()
+        {
+            try
+            {
+                using (var db = new DatabaseContext())
+                {
+                    Response.StatusCode = 200;
+                    return db.Breeds.ToList();
+                }
+            }
+            catch
+            {
+                Response.StatusCode = 422;
+                return Enumerable.Empty<Breed>();
+            }
+        }
 
         // [HttpPost]
         // public IActionResult PostBreed ([FromBody] string payload) {

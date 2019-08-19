@@ -95,8 +95,8 @@ namespace PetGo {
                 app.UseHsts ();
             }
 
-            app.UseAuthentication ();
-            app.UseHttpsRedirection ();
+            // app.UseAuthentication ();
+            // app.UseHttpsRedirection ();
             app.UseStaticFiles ();
             app.UseSpaStaticFiles ();
 

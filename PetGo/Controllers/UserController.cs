@@ -8,15 +8,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetGo.Models;
 
-namespace PetGo.Controllers {
-    [Route ("api/users")]
-    public class Users : Controller {
+namespace PetGo.Controllers
+{
+  [Route("api/users")]
+  public class Users : Controller
+  {
 
-        // [HttpGet ("")]
-        // public IEnumerable<User> GetUsers () {
-        //     using (var db = new data ()) {
-        //         return db.Users.ToList ();
-        //     }
-        // }
+    [HttpGet("")]
+    public User GetUsers()
+    {
+      return new User();
+
     }
+  }
 }

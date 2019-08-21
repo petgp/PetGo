@@ -16,6 +16,7 @@ import { ListingDisplayComponent } from './listing-display/listing-display.compo
 import { MessageDisplayComponent } from './message-display/message-display.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ActivityDisplayComponent } from './activity-display/activity-display.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SignupComponent } from './signup/signup.component';
     ListingDisplayComponent,
     MessageDisplayComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ActivityDisplayComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,19 +1,30 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MessageService } from '../message.service';
+
 @Component({
   selector: 'app-user-display',
   templateUrl: './user-display.component.html',
   styleUrls: ['./user-display.component.css']
 })
-export class UserDisplayComponent {
+export class UserDisplayComponent implements OnInit {
   public users: Users[];
-
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Users[]>(baseUrl + 'api/users').subscribe(result => {
+  constructor(private http: HttpClient, private messageService: MessageService, @Inject('BASE_URL') private baseUrl: string) {
+    this.http.get<Users[]>(this.baseUrl + 'api/users').subscribe(result => {
       this.users = result;
-    }, error => console.error(error));
+      this.log('fetched users');
+    }, error => this.handleError('getUsers', error));
+  }
+  private log(message: string) {
+    this.messageService.addMessage(`PetGoService: ${message}`);
+  }
+  private handleError(operation: string, error) {
+    this.log(`${operation} failed: ${error.message}`);
   }
 
+  ngOnInit() {
+
+  }
 }
 interface Users {
   Id: number;

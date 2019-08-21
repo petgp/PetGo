@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +8,19 @@ export class MessageService {
   constructor() { }
   private delegates: any[] = [];
   public messages: object[] = [];
-  addDelegate(delegate: any): void {
+  public addDelegate(delegate: any): void {
     this.delegates.push(delegate);
   }
-  addMessage(message: string): void {
+  public addMessage(message: string): void {
     this.messages.push(this.createMessage(message));
     if (this.delegates.length !== 0) {
-      this.delegates.map(d => d.userAccessedData());
+      this.delegates.forEach(d => d.userAccessedData());
     }
   }
-  clear(): void {
+  public clear(): void {
     this.messages = [];
   }
-  createMessage(message: string): object {
+  private createMessage(message: string): object {
     const tempMessage = new Message();
     tempMessage.id = this.messages.length;
     tempMessage.message = message;

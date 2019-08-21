@@ -8,8 +8,7 @@ import * as $ from 'jquery';
 })
 export class ActivityDisplayComponent implements OnInit {
   public messagesHidden = true;
-  private timer;
-  constructor(public messageService: MessageService, ) { }
+  constructor(public messageService: MessageService) { }
   displayMessages() {
     this.messagesHidden = !this.messagesHidden;
   }

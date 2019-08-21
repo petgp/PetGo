@@ -12,8 +12,8 @@ namespace PetGo.SQLite {
     public class ApplicationUser : IdentityUser
     {
         //fields to add, custom
-        public string FullName { get; set; }
-
+        //public string FullName { get; set; }
+        string Password {get; set;}
     }
 
   //  public DbSet<User> Users { get; set; }

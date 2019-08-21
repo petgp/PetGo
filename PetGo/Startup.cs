@@ -96,7 +96,7 @@ namespace PetGo {
             }
 
             app.UseCors (builder =>
-                builder.WithOrigins ("https://localhost:44372/api")
+                builder.WithOrigins ("https://localhost:5001/api")
                 .AllowAnyHeader ()
                 .AllowAnyMethod ());
             app.UseAuthentication ();

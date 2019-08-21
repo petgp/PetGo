@@ -36,7 +36,7 @@ import { UserComponent } from './user/user.component';
     MessageDisplayComponent,
     LoginComponent,
     SignupComponent,
-    ActivityDisplayComponent
+    ActivityDisplayComponent,
     RegistrationComponent,
     UserComponent
   ],

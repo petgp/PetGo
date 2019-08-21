@@ -28,9 +28,9 @@ namespace PetGo.Controllers {
             var user = await _userManager.FindByIdAsync (userId);
             //what fields to return from each user
             return new {
-                user.FullName,
+                //user.FullName,
                     user.Email,
-                    user.UserName
+                user.UserName
             };
 
         }

@@ -1,21 +1,21 @@
 using System.Text;
-//using System.ComponentModel.Design;
+using System.ComponentModel.Design;
 using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-//using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-//using Microsoft.Extensions.Logging;
-//using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 //using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.EntityFrameworkCore;
@@ -62,8 +62,8 @@ namespace PetGo {
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer (x => {
                 x.RequireHttpsMetadata = false;
-                x.SaveToken = false;
-                x.TokenValidationParameters = new TokenValidationParameters {
+                x.SaveToken = true;
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey (key),
                     ValidateIssuer = false,
@@ -95,16 +95,22 @@ namespace PetGo {
                 app.UseHsts ();
             }
 
+            app.UseCors(builder =>
+            builder.WithOrigins("https://localhost:44372/api")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
             app.UseAuthentication ();
             app.UseHttpsRedirection ();
             app.UseStaticFiles ();
             app.UseSpaStaticFiles ();
 
-            app.UseMvc (routes => {
-                routes.MapRoute (
-                    name: "default",
+            app.UseMvc(
+                routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
                     template: "{controller}/{action=Index}/{id?}");
-            });
+                });
 
             app.UseSpa (spa => {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

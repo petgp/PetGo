@@ -29,7 +29,7 @@ namespace PetGo.Models {
             this.Img_url = pet.Img_url;
             this.Breed = pet.Breed;
             this.Age = pet.Age;
-            this.Ownership_length = Ownership_length;
+            this.Ownership_length = pet.Ownership_length;
             this.breeds = breeds;
         }
         public List<string> breeds { get; set; }

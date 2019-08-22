@@ -1,3 +1,32 @@
-<p>
-  pet-display works!
-</p>
+<p *ngIf="!pets"><em>Loading...</em></p>
+<div class=" mb-3" id="pets">
+  <div class="card" *ngFor="let pet of pets">
+    <div class="card-body text-center">
+      <p><img class="img-fluid"
+          src="{{pet.img_url}}"
+          alt="card image" ></p>
+      <h4 class="card-title">{{pet.name}}</h4>
+      <p>Age: {{pet.age}}</p>
+      <p>Ownership Length: {{pet.ownership_length}}</p>
+
+   
+    </div>
+  </div>
+</div>
+
+
+<!--<p *ngIf="!users"><em>Loading...</em></p>
+<div class=" mb-3" id="pets">
+  <div class="card">
+    <div class="card-body text-center">
+      <p>
+        <img class=" img-fluid"
+             src="https://media.licdn.com/dms/image/C5603AQHfOTI0Um2Nqg/profile-displayphoto-shrink_200_200/0?e=1570665600&v=beta&t=HG1Zrj4jNBaBcOkrH1ml5iY2_TWcnirqwDVQLiRv1Bw"
+             alt="card image">
+      </p>
+      <h4 class="card-title">Thomas Weider</h4>
+      <p class="card-text">Thomas@email.com</p>
+      <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus">Edit</i></a>
+    </div>
+  </div>-->
+ 

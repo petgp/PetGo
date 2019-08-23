@@ -42,21 +42,39 @@ namespace PetGo.Controllers {
             }
         }
 
-        // [HttpPost]
-        // public IActionResult PostPet ([FromBody] string payload) {
-        //     try {
-        //         Pet pet = JsonConvert.DeserializeObject<Pet> (payload);
-        //         //Need to add pet owner id to current pet object from before sending to database
-        //         using (var db = new PetContext ()) {
-        //             db.Pets.Add (pet);
-        //             db.SaveChanges ();
+        [HttpPost]
+        public IActionResult PostPet([FromBody] PetWithBreed payload)
+        {
+            try
+            {
+                Pet pet = new Pet(payload);
+                using (var db = new DatabaseContext())
+                {
+                    db.Pets.Add(pet);
+                    // we need to iterate through every breed listed in the payload and add it to the breed DB
+                    foreach (var breed in payload.breeds.ToList())
+                    {
+                        Breed newBreed = new Breed();
+                        newBreed.Title = breed;
+                        newBreed.PetId = pet.Id;
+                        db.Breeds.Add(newBreed);
+                    }
+                    db.SaveChanges();
 
-        //             return CreatedAtRoute ("pets", pet.Id, pet);
-        //         }
-        //     } catch (Exception ex) {
-        //         return StatusCode (422, ex.Message);
-        //     }
-        // }
+                    //return CreatedAtRoute("pets", pet.Id, pet);
+                    return Json(pet);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("*************************************************\n");
+                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine("*************************************************\n");
+                return StatusCode(422, ex.Message);
+            }
+        }
+
+    
 
         // [HttpDelete]
         // public IActionResult DeletePet ([FromBody] string payload) {

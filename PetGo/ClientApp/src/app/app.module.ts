@@ -21,6 +21,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { UserService } from './shared/user.service';
 import { AppRoutingModule } from './app-routing.module';
 import { UserComponent } from './user/user.component';
+import { ListingCreationComponent } from './listing-creation/listing-creation.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UserComponent } from './user/user.component';
     SignupComponent,
     ActivityDisplayComponent,
     RegistrationComponent,
-    UserComponent
+    UserComponent,
+    ListingCreationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -55,6 +57,7 @@ import { UserComponent } from './user/user.component';
       { path: 'pets', component: PetDisplayComponent },
       { path: 'listings', component: ListingDisplayComponent },
       { path: 'messages', component: MessageDisplayComponent },
+      { path: 'listing-creation', component: ListingCreationComponent },
     ])
   ],
   providers: [UserService, {

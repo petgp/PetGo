@@ -19,6 +19,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ActivityDisplayComponent } from './activity-display/activity-display.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserService } from './shared/user.service';
+import { ListingService } from './shared/listing.service';
 import { AppRoutingModule } from './app-routing.module';
 import { UserComponent } from './user/user.component';
 import { ListingCreationComponent } from './listing-creation/listing-creation.component';

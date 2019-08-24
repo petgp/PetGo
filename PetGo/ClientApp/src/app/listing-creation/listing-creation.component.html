@@ -14,7 +14,19 @@
         service.formModel.get('Title').touched &&
         service.formModel.get('Title').errors?.Title
       ">This field is mandatory.</label>
+
           </div>
+          <div class="form-group required">
+            <label>Description</label>
+            <input class="form-control" formControlName="Description" />
+            <label class="text-danger"
+                   *ngIf="
+        service.formModel.get('Description').touched &&
+        service.formModel.get('Description').errors?.Description
+      ">This field is mandatory.</label>
+
+          </div>
+
           <div class="form-group required">
             <label>Your pets name</label>
             <input class="form-control" formControlName="PetName" />

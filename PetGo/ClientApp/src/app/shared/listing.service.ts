@@ -19,25 +19,20 @@ export class ListingService {
     Breeds:"",
     Age: "",
     Ownership_length: "",
-    Img_url: ""
+    Img_url: "",
+    Description: ""
   });
 
 
 
   
-  register() {
-    let body = {
-      UserName: this.formModel.value.UserName,
-      Email: this.formModel.value.Email,
-      //FullName: this.formModel.value.FullName,
-      Password: this.formModel.value.Passwords.Password,
-      //Address: this.formModel.value.Address,
-      //PhoneNumber: this.formModel.value.PhoneNumber,
-      //EmergencyName: this.formModel.value.EmergencyName,
-      //EmergencyNumber: this.formModel.value.EmergencyNumber,
-      //EventCode: this.formModel.value.EventCode
-    };
-    return this.http.post(this.BaseURL + '/ApplicationUser/Register', body);
+  CreatePet(pet) {
+
+    console.log("about to try to post this pet: ");
+    console.log(pet);
+    console.log(this.BaseURL + '/pets')
+    
+    return this.http.post(this.BaseURL + '/pets', pet);
 
   }
 

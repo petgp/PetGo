@@ -36,7 +36,7 @@ export class ListingService {
     console.log(this.BaseURL + '/pets')
     
     //return this.http.post(this.BaseURL + '/pets', pet);
-    return this.http.post('/api/pets', pet).pipe(map(res => res.results || []));
+    return this.http.post<Pet>('/api/pets', pet);
 
   }
 

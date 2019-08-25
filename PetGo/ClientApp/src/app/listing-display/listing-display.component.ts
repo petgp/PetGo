@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-listing-display',
   templateUrl: './listing-display.component.html',
   styleUrls: ['./listing-display.component.css']
 })
-export class ListingDisplayComponent implements OnInit {
+export class ListingDisplayComponent  {
 
-  constructor() { }
+  public listings: Listing[];
 
-  ngOnInit() {
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    http.get<Listing[]>(baseUrl + 'api/listings').subscribe(result => {
+      this.listings = result;
+      console.log(this.listings);
+    }, error => console.error(error));
   }
 
 }

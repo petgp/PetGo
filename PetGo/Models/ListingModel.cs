@@ -12,4 +12,10 @@ namespace PetGo.Models {
         public int ToUserId { get; set; }
 
     }
+
+    public class ListingWithPet
+    {
+        public Listing listing { get; set; }
+        public Pet pet { get; set; }
+    }
 }

@@ -12,7 +12,7 @@ namespace PetGo.Controllers {
 
       
             [HttpGet]
-            public IEnumerable<Listing> GetListings()
+            public IEnumerable<ListingWithPet> GetListings()
             {
                 Debug.WriteLine("~~~~~~~/n~~~~~/n");
                 try
@@ -20,13 +20,17 @@ namespace PetGo.Controllers {
                     using (var db = new DatabaseContext())
                     {
                         Response.StatusCode = 200;
-                        return db.Listings.ToList();
+
+                    var query = from l in db.Listings
+                                join p in db.Pets on l.PetId equals p.Id
+                                select new ListingWithPet { listing = l, pet = p };
+                    return query.ToList();
                     }
                 }
                 catch
                 {
                     Response.StatusCode = 422;
-                    return Enumerable.Empty<Listing>();
+                    return Enumerable.Empty<ListingWithPet>();
                 }
             }
 

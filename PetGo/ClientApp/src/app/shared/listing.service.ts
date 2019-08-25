@@ -2,8 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Pet } from '../pet-display/pet-display.component';
-import { Listing } from '../pet-display/listing-display.component';
+import { Pet } from     '../pet-display/pet-display.component';
+import { Listing } from '../listing-display/listing-display.component';
 
 @Injectable({
   providedIn: 'root'

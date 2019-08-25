@@ -13,3 +13,16 @@ export class ListingDisplayComponent implements OnInit {
   }
 
 }
+
+export interface Listing {
+  id: number;
+  date: number;
+  timeoutDate: number;
+  userId: number;
+  petId: number;
+  title: string;
+  description: string;
+  toUserId: number
+  
+
+}

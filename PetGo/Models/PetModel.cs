@@ -15,11 +15,28 @@ namespace PetGo.Models {
         public string Breed { get; set; }
         public int Age { get; set; }
         public int Ownership_length { get; set; }
+        public Pet()
+        {
 
+        }
+        public Pet(PetWithBreed that)
+        {
+            this.Id = that.Id;
+            this.Owner_id = that.Owner_id;
+            this.Name = that.Name;
+            this.Type = that.Type;
+            this.Img_url = that.Img_url;
+            this.Breed = that.Breed;
+            this.Age = that.Age;
+            this.Ownership_length = that.Ownership_length;
+        }
     }
+   
+
 
     public class PetWithBreed : Pet
     {
+        public PetWithBreed() { }
         public PetWithBreed(Pet pet, List<string> breeds)
         {
             this.Id = pet.Id;
@@ -29,7 +46,7 @@ namespace PetGo.Models {
             this.Img_url = pet.Img_url;
             this.Breed = pet.Breed;
             this.Age = pet.Age;
-            this.Ownership_length = Ownership_length;
+            this.Ownership_length = pet.Ownership_length;
             this.breeds = breeds;
         }
         public List<string> breeds { get; set; }

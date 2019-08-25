@@ -3,7 +3,16 @@
   height: 37px;
 
 }
+#pets{
+  border:none;
+  height:37px;
+}
 #users>.card-header{
+  border-radius: 24px;
+  margin-top: 5px;
+  display: inline-flex;
+}
+#pets>.card-header{
   border-radius: 24px;
   margin-top: 5px;
   display: inline-flex;

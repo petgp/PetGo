@@ -25,25 +25,25 @@ export class RegistrationComponent implements OnInit {
     this.service.register().subscribe(
       (res: any) => {
         console.log('res', res)
-        if (res.Status) {
+        if (res.succeeded) {
           console.log('first step')
           this.service.formModel.reset();
           console.log('New user created', 'Registration successful');
           this.login(user);
         } else {
-          console.log('i am here iin errors')
-          //res.errors.forEach(element => {
-          //  switch (element.code) {
-          //    case 'DuplicateUserName':
-          //      console.log('Username is already taken', 'Registration failed');
-          //      // Username already taken
-          //      break;
-          //    default:
-          //      console.log(element.description, 'Registration failed');
-          //      // registration failed
-          //      break;
-          //  }
-          //});
+          console.log('i is in errors')
+          res.errors.forEach(element => {
+            switch (element.code) {
+              case 'DuplicateUserName':
+                console.log('Username is already taken', 'Registration failed');
+                // Username already taken
+                break;
+              default:
+                console.log(element.description, 'Registration failed');
+                // registration failed
+                break;
+            }
+          });
         }
       },
       err => {

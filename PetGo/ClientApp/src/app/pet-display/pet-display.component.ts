@@ -11,7 +11,7 @@ export class PetDisplayComponent {
   public pets: Pet[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Pets[]>(baseUrl + 'api/pets').subscribe(result => {
+    http.get<Pet[]>(baseUrl + 'api/pets').subscribe(result => {
       this.pets = result;
       console.log(this.pets);
     }, error => console.error(error));

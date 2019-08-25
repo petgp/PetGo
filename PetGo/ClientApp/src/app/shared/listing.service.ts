@@ -2,8 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { map } from "rxjs/operators";
-import { Pet } from '../pet-display/pet-display.component';
+import { Pet } from     '../pet-display/pet-display.component';
+import { Listing } from '../listing-display/listing-display.component';
 
 @Injectable({
   providedIn: 'root'
@@ -36,16 +36,12 @@ export class ListingService {
     console.log(this.BaseURL + '/pets')
     
     //return this.http.post(this.BaseURL + '/pets', pet);
-    return this.http.post('/api/pets', pet).pipe(map(res => res.results || []));
+    return this.http.post<Pet>('/api/pets', pet);
 
   }
 
-
-  login(formData) {
-    return this.http.post(this.BaseURL + '/ApplicationUser/Login', formData);
+  CreateListing(listing) {
+    return this.http.post<Listing>('/api/pets', listing);
   }
-
-  getUserProfile() {
-    return this.http.get(this.BaseURL + '/UserProfile');
-  }
+  
 }

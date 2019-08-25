@@ -3,6 +3,7 @@ import { ListingService } from '../shared/listing.service';
 //import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-listing-creation',
   templateUrl: './listing-creation.component.html',
@@ -29,15 +30,6 @@ export class ListingCreationComponent implements OnInit {
       Ownership_length: form.value.Ownership_length,
       Breeds: ['shoe']
     }
-    
-    this.service.CreatePet(pet).subscribe(result => {
-      //console.log(result);
-      let petId = result.id;
-    }, error => console.error(error));
-
-    this.service.CreatePet(pet)
-   
-    
     const listing = {
       Date: Date.now(),
       TimeoutDate: Date.now() + (24 * 3600),
@@ -46,7 +38,23 @@ export class ListingCreationComponent implements OnInit {
       Title: form.value.Title,
       Description: form.value.Description
     }
+
+    this.service.CreatePet(pet).subscribe(result => {
+      console.log(result);
+      listing.PetId = result.id;
+    }, error => console.error(error));
+
+    if (listing.PetId != null) {
+      this.service.CreateListing(listing).subscribe(result => {
+        console.log(result);
+      }, error => console.error(error));
+    }
+    else {
+      console.error("error posting pet");
+    }
   }
+    
+   
 }
 
 

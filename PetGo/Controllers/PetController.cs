@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,67 +17,65 @@ namespace PetGo.Controllers {
                 using (var db = new DatabaseContext())
                 {
                     Response.StatusCode = 200;
-                    System.Diagnostics.Debug.WriteLine("HELLLO\n\n\n");
-                    //var test = from p in db.Breeds;
-                    //var temp = db.Breeds.Where(b => b.PetId.Equals(52)).Select(b => new { title = b.Title }).ToList();
-                    //var temp = db.Breeds.Select(b => new { Title = b.Title }).ToList();
-
-                    //var query = from b in db.Breeds
-                    //           where b.Id == 52 select b.Title;
-                    //System.Diagnostics.Debug.WriteLine(test);
-
-
-                    //foreach(var item in  temp)
-                    //{
-                    //    System.Diagnostics.Debug.WriteLine(item);
-                    //}
-                    //initialize new return list
+               
                     List<PetWithBreed> ret = new List<PetWithBreed>();
                     //loop through the pets in the db
                     foreach (var pet in db.Pets.ToList())
                     {
-                        //query the breed table and return a list of the breeds that correspond to the current petID
-                        //var temp = db.Breeds.Where(b => b.PetId.Equals(pet.Id)).Select(b => string { title = (string)b.Title }).ToList();
-                        //PetWithBreed updatedPet = (PetWithBreed)pet;
-
                         var query = from b in db.Breeds
                                     where b.PetId == pet.Id
                                     select b.Title;
-                        //System.Diagnostics.Debug.WriteLine(pet.GetType());
                         PetWithBreed updatedPet = new PetWithBreed(pet, query.ToList());
-                  
-                        
-                      
-                        ret.Add(updatedPet);
 
+                        ret.Add(updatedPet);
 
                     }
                     //return db.Pets.ToList();
                     return ret;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine("catch: " + ex.ToString());
                 Response.StatusCode = 422;
                 return Enumerable.Empty<PetWithBreed>();
             }
         }
 
-        // [HttpPost]
-        // public IActionResult PostPet ([FromBody] string payload) {
-        //     try {
-        //         Pet pet = JsonConvert.DeserializeObject<Pet> (payload);
-        //         //Need to add pet owner id to current pet object from before sending to database
-        //         using (var db = new PetContext ()) {
-        //             db.Pets.Add (pet);
-        //             db.SaveChanges ();
+        [HttpPost]
+        public IActionResult PostPet([FromBody] PetWithBreed payload)
+        {
+            try
+            {
+                Pet pet = new Pet(payload);
+                using (var db = new DatabaseContext())
+                {
+                    db.Pets.Add(pet);
+                    // we need to iterate through every breed listed in the payload and add it to the breed DB
+                    foreach (var breed in payload.breeds.ToList())
+                    {
+                        Breed newBreed = new Breed();
+                        newBreed.Title = breed;
+                        newBreed.PetId = pet.Id;
+                        db.Breeds.Add(newBreed);
+                    }
+                    db.SaveChanges();
 
-        //             return CreatedAtRoute ("pets", pet.Id, pet);
-        //         }
-        //     } catch (Exception ex) {
-        //         return StatusCode (422, ex.Message);
-        //     }
-        // }
+                    //return CreatedAtRoute("pets", pet.Id, pet);
+                    //return Json(pet);
+                    return Ok(pet);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("*************************************************\n");
+                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine("*************************************************\n");
+                return StatusCode(422, ex.Message);
+            }
+        }
+
+    
 
         // [HttpDelete]
         // public IActionResult DeletePet ([FromBody] string payload) {

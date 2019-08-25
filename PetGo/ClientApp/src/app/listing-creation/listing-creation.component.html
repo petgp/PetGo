@@ -1,0 +1,98 @@
+<div class="container">
+  <div id="login-row" class="row justify-content-center align-items-center">
+    <div id="login-column" class="col-md-6">
+      <div id="login-box" class="col-md-12">
+        <form [formGroup]="service.formModel"
+              autocomplete="off"
+              (submit)="onSubmit(service.formModel)">
+
+          <div class="form-group required">
+            <label>Listing Title</label>
+            <input class="form-control" formControlName="Title" />
+            <label class="text-danger"
+                   *ngIf="
+        service.formModel.get('Title').touched &&
+        service.formModel.get('Title').errors?.Title
+      ">This field is mandatory.</label>
+
+          </div>
+          <div class="form-group required">
+            <label>Description</label>
+            <input class="form-control" formControlName="Description" />
+            <label class="text-danger"
+                   *ngIf="
+        service.formModel.get('Description').touched &&
+        service.formModel.get('Description').errors?.Description
+      ">This field is mandatory.</label>
+
+          </div>
+
+          <div class="form-group required">
+            <label>Your pets name</label>
+            <input class="form-control" formControlName="PetName" />
+            <label class="text-danger"
+                   *ngIf="
+                service.formModel.get('PetName').touched &&
+                service.formModel.get('PetName').errors?.PetName
+              ">This field is mandatory.</label>
+          </div>
+          <div class="form-group required">
+            <label>What kind of pet?</label>
+            <input class="form-control" formControlName="Type" />
+            <label class="text-danger"
+                   *ngIf="
+                service.formModel.get('Type').touched &&
+                service.formModel.get('Type').errors?.Type
+              ">This field is mandatory.</label>
+          </div><div class="form-group required">
+            <label>Breeds(separate by commas)</label>
+            <input class="form-control" formControlName="Breeds" />
+            <label class="text-danger"
+                   *ngIf="
+                service.formModel.get('Breeds').touched &&
+                service.formModel.get('Breeds').errors?.Breeds
+              ">This field is mandatory.</label>
+          </div>
+          <div class="form-group required">
+            <label>Age</label>
+            <input class="form-control" formControlName="Age" />
+            <label class="text-danger"
+                   *ngIf="
+                service.formModel.get('Age').touched &&
+                service.formModel.get('Age').errors?.Age
+              ">This field is mandatory.</label>
+          </div>
+          <div class="form-group required">
+            <label>Ownership Length</label>
+            <input class="form-control" formControlName="Ownership_length" />
+            <label class="text-danger"
+                   *ngIf="
+                service.formModel.get('Ownership_length').touched &&
+                service.formModel.get('Ownership_length').errors?.Ownership_length
+              ">This field is mandatory.</label>
+          </div>
+
+          <div class="form-group required">
+            <label>Image URL</label>
+            <input class="form-control" formControlName="Img_url" />
+            <label class="text-danger"
+                   *ngIf="
+                service.formModel.get('Img_url').touched &&
+                service.formModel.get('Img_url').errors?.Img_url
+              ">This field is mandatory.</label>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-8 offset-md-2">
+              <button type="submit"
+                      class="btn btn-lg btn-block"
+                      [disabled]="!service.formModel.valid">
+                Create Listing
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

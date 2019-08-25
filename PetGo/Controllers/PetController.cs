@@ -62,7 +62,8 @@ namespace PetGo.Controllers {
                     db.SaveChanges();
 
                     //return CreatedAtRoute("pets", pet.Id, pet);
-                    return Json(pet);
+                    //return Json(pet);
+                    return Ok(pet);
                 }
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PetDisplayComponent {
 
-  public pets: Pets[];
+  public pets: Pet[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Pets[]>(baseUrl + 'api/pets').subscribe(result => {
@@ -21,7 +21,7 @@ export class PetDisplayComponent {
 
 
 
-interface Pets {
+export interface Pet {
   id:               number;
   owner_id:         number;
   name:             string;

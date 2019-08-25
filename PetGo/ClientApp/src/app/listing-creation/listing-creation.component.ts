@@ -31,9 +31,11 @@ export class ListingCreationComponent implements OnInit {
     }
     
     this.service.CreatePet(pet).subscribe(result => {
-      console.log(result);
+      //console.log(result);
+      let petId = result.id;
     }, error => console.error(error));
 
+    this.service.CreatePet(pet)
    
     
     const listing = {

@@ -1,0 +1,23 @@
+<p *ngIf="!user"><em>Loading...</em></p>
+<div *ngIf="user" class="card mb-3" id="user">
+  <div class="card-body">
+    <p class="card-image"><img class=" img-fluid" src="./default-user-icon.jpg" alt="card image"></p>
+    <input class="card-title" value="{{ user.userName }}">
+    <input class="card-title" value="{{ user.email }}">
+    <input class="card-title" value="{{ user.phoneNumber }}">
+    <p>Phone Number Confirmed: <input class="card-title" value="{{ user.phoneNumberConfirmed }}"></p>
+    <p>Email Confirmed: <input class="card-title" value="{{ user.emailConfirmed }}"></p>
+    <p>Two Factor Enabled:
+
+    </p>
+    <select ng-model="selectedCar">
+      <option value="false">false</option>
+      <option value="true">true</option>
+    </select>
+    <h1>You selected: {{selectedCar}}</h1>
+    <div>
+      <a click="discard()" class="btn btn-primary btn-sm"><i class="fa fa-plus">Discard Changes</i></a>
+      <a click="save()" class="btn btn-primary btn-sm"><i class="fa fa-plus">Save Changes</i></a>
+    </div>
+  </div>
+</div>

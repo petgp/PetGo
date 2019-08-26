@@ -9,12 +9,12 @@ using PetGo.SQLite;
 
 namespace PetGo.Models
 {
-    public class AuthenticationContext : IdentityDbContext
+  public class AuthenticationContext : IdentityDbContext
+  {
+    public AuthenticationContext(DbContextOptions options) : base(options)
     {
-        public AuthenticationContext(DbContextOptions options): base(options)
-        {
 
-        }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
+    public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+  }
 }

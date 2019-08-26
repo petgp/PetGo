@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Pet } from '../pet-display/pet-display.component';
 
 @Component({
   selector: 'app-listing-display',
@@ -8,12 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListingDisplayComponent  {
 
-  public listings: Listing[];
+
+  public listingsWithPets: ListingWithPet[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Listing[]>(baseUrl + 'api/listings').subscribe(result => {
-      this.listings = result;
-      console.log(this.listings);
+    http.get<ListingWithPet[]>(baseUrl + 'api/listings').subscribe(result => {
+      this.listingsWithPets = result;
+      console.log(this.listingsWithPets);
     }, error => console.error(error));
   }
 
@@ -28,6 +30,9 @@ export interface Listing {
   title: string;
   description: string;
   toUserId: number
-  
+}
 
+interface ListingWithPet {
+  listing: Listing;
+  pet: Pet;
 }

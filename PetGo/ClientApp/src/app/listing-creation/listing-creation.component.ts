@@ -28,7 +28,7 @@ export class ListingCreationComponent implements OnInit {
       Img_url: form.value.Img_url,
       Age: form.value.Age,
       Ownership_length: form.value.Ownership_length,
-      Breeds: ['shoe']
+      Breeds: ['shoez']
     }
     const listing = {
       Date: Date.now(),
@@ -46,6 +46,8 @@ export class ListingCreationComponent implements OnInit {
       this.service.CreateListing(listing).subscribe(result => {
         console.log(result);
         console.log('create listing was good');
+        form.reset();
+        this.router.navigate(['listings']);
       }, error => console.log(error));
     }, error => console.error(error));
 

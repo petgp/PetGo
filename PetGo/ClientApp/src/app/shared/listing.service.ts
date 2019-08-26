@@ -12,7 +12,6 @@ export class ListingService {
 
   public pet: Pet;
   constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURL = 'https://localhost:43372/api';
 
   // this is a form we built, it has the fields we need to send, with validators
   formModel = this.fb.group({
@@ -33,7 +32,6 @@ export class ListingService {
 
     console.log("about to try to post this pet: ");
     console.log(pet);
-    console.log(this.BaseURL + '/pets')
     
     //return this.http.post(this.BaseURL + '/pets', pet);
     return this.http.post<Pet>('/api/pets', pet);

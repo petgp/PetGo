@@ -3,6 +3,7 @@ import { ListingService } from '../shared/listing.service';
 //import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { JwtHelper } from '../helper';
 
 @Component({
   selector: 'app-listing-creation',
@@ -11,16 +12,22 @@ import { NgForm } from '@angular/forms';
 })
 export class ListingCreationComponent implements OnInit {
 
-  constructor(public service: ListingService, private router: Router) { }
+  constructor(public service: ListingService, private router: Router, private jwt: JwtHelper) { }
 
   ngOnInit() {
   }
 
 
   onSubmit(form) {
-    // this is temporary, we need to store and
-    //  get userId from local storage or a token or something ?
-    const UserId = 6000;
+
+	//if(localStorage.getItem('token') !== null){
+	//const token = localStorage.getItem('token')
+    //const decoded = this.jwt.decodeToken(token);
+	//}else{
+	//	return 'Fuck off'
+	//	}
+
+    const UserId = 6000;//decoded
     const pet = {
       Owner_id: UserId,
       Name: form.value.PetName,
@@ -40,7 +47,7 @@ export class ListingCreationComponent implements OnInit {
     }
 
     this.service.CreatePet(pet).subscribe(result => {
-      console.log(result);
+      console.log('result', result);
       listing.PetId = result.id;
       console.log('create pet was good');
       this.service.CreateListing(listing).subscribe(result => {

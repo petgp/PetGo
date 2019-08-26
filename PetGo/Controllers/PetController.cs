@@ -51,6 +51,7 @@ namespace PetGo.Controllers {
                 using (var db = new DatabaseContext())
                 {
                     db.Pets.Add(pet);
+                    db.SaveChanges();
                     // we need to iterate through every breed listed in the payload and add it to the breed DB
                     foreach (var breed in payload.breeds.ToList())
                     {

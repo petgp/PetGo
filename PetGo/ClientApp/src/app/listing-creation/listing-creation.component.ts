@@ -42,16 +42,14 @@ export class ListingCreationComponent implements OnInit {
     this.service.CreatePet(pet).subscribe(result => {
       console.log(result);
       listing.PetId = result.id;
-    }, error => console.error(error));
-
-    if (listing.PetId != null) {
+      console.log('create pet was good');
       this.service.CreateListing(listing).subscribe(result => {
         console.log(result);
-      }, error => console.error(error));
-    }
-    else {
-      console.error("error posting pet");
-    }
+        console.log('create listing was good');
+      }, error => console.log(error));
+    }, error => console.error(error));
+
+   
   }
     
    

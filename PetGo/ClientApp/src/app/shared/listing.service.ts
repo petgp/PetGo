@@ -41,7 +41,7 @@ export class ListingService {
   }
 
   CreateListing(listing) {
-    return this.http.post<Listing>('/api/pets', listing);
+    return this.http.post<Listing>('/api/listings', listing);
   }
   
 }

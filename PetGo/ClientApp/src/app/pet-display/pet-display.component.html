@@ -2,14 +2,12 @@
 <div class=" mb-3" id="pets">
   <div class="card" *ngFor="let pet of pets">
     <div class="card-body text-center">
-      <p><img class="img-fluid"
-          src="{{pet.img_url}}"
-          alt="card image" ></p>
+      <p><img class="img-fluid" src="{{validImg(pet.img_url)}}" alt="card image"></p>
       <h4 class="card-title">{{pet.name}}</h4>
       <p>Age: {{pet.age}}</p>
       <p>Ownership Length: {{pet.ownership_length}}</p>
 
-   
+
     </div>
   </div>
 </div>
@@ -29,4 +27,3 @@
       <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus">Edit</i></a>
     </div>
   </div>-->
- 

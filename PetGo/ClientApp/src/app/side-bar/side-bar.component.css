@@ -5,3 +5,14 @@ a{
   flex: 0 0 100%;
   max-width: 100%;
 }
+.list-group-item{
+  width: 200px;
+}
+.list-group{
+  display: inline-flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
+.row{
+  text-align: center;
+}

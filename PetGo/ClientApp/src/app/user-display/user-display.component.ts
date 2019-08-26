@@ -10,7 +10,7 @@ import { MessageService } from '../message.service';
 export class UserDisplayComponent implements OnInit {
   public users: Users[];
   constructor(private http: HttpClient, private messageService: MessageService, @Inject('BASE_URL') private baseUrl: string) {
-    this.http.get<Users[]>(this.baseUrl + 'api/users').subscribe(result => {
+    this.http.get<Users[]>(this.baseUrl + 'api/ApplicationUser').subscribe(result => {
       this.users = result;
       this.log('fetched users');
     }, error => this.handleError('getUsers', error));
@@ -26,7 +26,7 @@ export class UserDisplayComponent implements OnInit {
 
   }
 }
-interface Users {
+export interface Users {
   Id: number;
   Name: string;
   Address: string;

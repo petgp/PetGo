@@ -2,14 +2,15 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-
+import { MessageService } from '../message.service';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService) { }
 
   // this is a form we built, it has the fields we need to send, with validators
   formModel = this.fb.group({
@@ -58,12 +59,50 @@ export class UserService {
     return this.http.post('/api/ApplicationUser/Register', body);
 
   }
-
   login(formData) {
     return this.http.post('/api/ApplicationUser/Login', formData);
   }
-
-  getUserProfile() {
-    return this.http.get('/api/UserProfile');
+  getUsers(): Observable<Users[]> {
+    return this.http.get<Users[]>('api/ApplicationUser').pipe(
+      tap(_ => this.log('fetched Users')),
+      catchError(this.handleError<Users[]>('getUsers', []))
+    );
   }
+  getSingleUser(id: string): Observable<Users> {
+    return this.http.get<Users>('api/ApplicationUser/' + id).pipe(
+      tap(_ => this.log('fetched user ' + id)),
+      catchError(this.handleError<Users>('getUser'))
+    );
+  }
+  updateUser(user: Users): Observable<Users> {
+    return this.http.post<Users>('/api/ApplicationUser/update', user).pipe(
+      tap(_ => this.log('updated user ' + user.id)),
+      catchError(this.handleError<Users>('updateUser'))
+    );
+  }
+  private log(message: string) {
+    this.messageService.addMessage(`PetGoService: ${message}`);
+  }
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
+  }
+}
+export interface Users {
+  id: string;
+  userName: string;
+  email: string;
+  emailConfirmed: boolean;
+  passwordHash: string;
+  securityStamp: string;
+  concurrencyStamp: string;
+  phoneNumber: string;
+  phoneNumberConfirmed: boolean;
+  twoFactorEnabled: boolean;
+  lockoutEnd: string;
+  lockoutEnabled: boolean;
+  accessFailedCount: number;
 }

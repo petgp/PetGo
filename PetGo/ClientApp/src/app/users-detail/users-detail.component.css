@@ -23,6 +23,7 @@
 }
 .card{
   margin:5px;
+  min-width: 400px !important;
 }
 .card-image{
   text-align: center;
@@ -34,4 +35,12 @@
 .card-body>div>a{
   color:white;
   margin:5px;
+}
+p>input{
+  float: right;
+  width:70%;
+}
+.two>select{
+  float:right;
+  width: 40%;
 }

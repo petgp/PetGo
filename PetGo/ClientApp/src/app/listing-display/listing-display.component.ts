@@ -7,7 +7,7 @@ import { Pet } from '../pet-display/pet-display.component';
   templateUrl: './listing-display.component.html',
   styleUrls: ['./listing-display.component.css']
 })
-export class ListingDisplayComponent  {
+export class ListingDisplayComponent {
 
 
   public listingsWithPets: ListingWithPet[];
@@ -29,7 +29,7 @@ export interface Listing {
   petId: number;
   title: string;
   description: string;
-  toUserId: number
+  toUserId: number;
 }
 
 interface ListingWithPet {

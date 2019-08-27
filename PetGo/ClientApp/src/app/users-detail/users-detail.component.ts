@@ -12,16 +12,17 @@ import { Location } from '@angular/common';
 })
 export class UsersDetailComponent implements OnInit {
   @Input() user: Users;
-  public selectedCar = '';
-  public items: Array<Object> = [{
-    id: 1,
-    label: 'aLabel',
-    subItem: { name: 'aSubItem' }
-  }, {
-    id: 2,
-    label: 'bLabel',
-    subItem: { name: 'bSubItem' }
-  }];
+  // public data = {
+  //   phoneNumberConfirmed: 'false',
+  //   emailConfirmed: 'false',
+  //   twoFactorEnabled: 'true'
+  // };
+  public items: Array<Object> = [
+    {
+      value: 'true'
+    }, {
+      value: 'false'
+    }];
   constructor(
     private http: HttpClient,
     private location: Location,
@@ -34,15 +35,25 @@ export class UsersDetailComponent implements OnInit {
   getHero(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.http.get<Users>(this.baseUrl + 'api/ApplicationUser/' + id).subscribe(result => {
+      console.log(result);
       this.user = result;
+      console.log(this.user);
       this.log('fetched user ' + id);
     }, error => this.handleError('getUser', error));
   }
   discard(): void {
+    console.log('HELLO?');
     this.location.back();
   }
   save(): void {
-    // this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
+    console.log('HELLO' + this.user.userName);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.http.post<Users>('/api/ApplicationUser/update', this.user).subscribe(result => {
+      this.user = result;
+      this.log('updated user ' + id);
+      this.location.replaceState('/users');
+      location.reload();
+    }, error => this.handleError('updateUser', error));
   }
   goBack(): void {
     this.location.back();

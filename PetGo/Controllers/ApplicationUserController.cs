@@ -32,17 +32,11 @@ namespace PetGo.Controllers
     }
 
     [HttpGet]
-    public async Task<Object> GetAllUsers()
+    public OkObjectResult GetAllUsers()
     {
       try
       {
-        List<ApplicationUser> result = new List<ApplicationUser>();
-        var optionsBuilder = new DbContextOptionsBuilder<AuthenticationContext>();
-        optionsBuilder.UseMySql("Data source=us-cdbr-iron-east-02.cleardb.net;database=heroku_4814ee10c387aab;user id=b2f72e34023ddb;Password=3ccdc0b2;");
-        using (var db = new AuthenticationContext(optionsBuilder.Options))
-        {
-          result = db.ApplicationUsers.ToList();
-        }
+        var result = _userManager.Users;
         return Ok(result);
       }
       catch (Exception ex)
@@ -56,12 +50,33 @@ namespace PetGo.Controllers
     {
       try
       {
-        var optionsBuilder = new DbContextOptionsBuilder<AuthenticationContext>();
-        optionsBuilder.UseMySql("Data source=us-cdbr-iron-east-02.cleardb.net;database=heroku_4814ee10c387aab;user id=b2f72e34023ddb;Password=3ccdc0b2;");
-        using (var db = new AuthenticationContext(optionsBuilder.Options))
-        {
-          return Ok(db.ApplicationUsers.Find(id));
-        }
+        ApplicationUser result = await _userManager.FindByIdAsync(id);
+        return Ok(result);
+      }
+      catch (Exception ex)
+      {
+        throw ex;
+      }
+    }
+    [HttpPost]
+    [Route("update")]
+    public async Task<Object> UpdateUser(ApplicationUser user)
+    {
+      try
+      {
+        ApplicationUser model = await _userManager.FindByIdAsync(user.Id);
+        // Update it with the values from the user model
+        model.UserName = user.UserName;
+        model.Email = user.Email;
+        model.EmailConfirmed = user.EmailConfirmed;
+        model.PhoneNumber = user.PhoneNumber;
+        model.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
+        model.TwoFactorEnabled = user.TwoFactorEnabled;
+        model.LockoutEnd = user.LockoutEnd;
+        model.LockoutEnabled = user.LockoutEnabled;
+        model.AccessFailedCount = user.AccessFailedCount;
+        var result = await _userManager.UpdateAsync(model);
+        return Ok();
 
       }
       catch (Exception ex)
@@ -131,7 +146,6 @@ namespace PetGo.Controllers
       catch (Exception ex)
       {
         string mes = ex.Message;
-        string test = "test";
         return BadRequest(new { message = "Email or password is incorrect" });
       }
     }

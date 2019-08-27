@@ -2,22 +2,31 @@
 <div *ngIf="user" class="card mb-3" id="user">
   <div class="card-body">
     <p class="card-image"><img class=" img-fluid" src="./default-user-icon.jpg" alt="card image"></p>
-    <input class="card-title" value="{{ user.userName }}">
-    <input class="card-title" value="{{ user.email }}">
-    <input class="card-title" value="{{ user.phoneNumber }}">
-    <p>Phone Number Confirmed: <input class="card-title" value="{{ user.phoneNumberConfirmed }}"></p>
-    <p>Email Confirmed: <input class="card-title" value="{{ user.emailConfirmed }}"></p>
-    <p>Two Factor Enabled:
-
+    <p>Username: <input [(ngModel)]="user.userName" class="card-title" value="{{ user.userName }}"></p>
+    <p>Email: <input [(ngModel)]="user.email" class="card-title" value="{{ user.email }}"></p>
+    <p>Phone #: <input [(ngModel)]="user.phoneNumber" class="card-title" value="{{ user.phoneNumber }}"></p>
+    <p class="two">Phone Number Confirmed:
+      <select name="PhoneNumberConfirmed" id="PhoneNumberConfirmed" [(ngModel)]="user.phoneNumberConfirmed">
+        <option *ngFor="let i of items" [value]="i.value">
+          {{user.phoneNumberConfirmed}}</option>
+      </select>
     </p>
-    <select ng-model="selectedCar">
-      <option value="false">false</option>
-      <option value="true">true</option>
-    </select>
-    <h1>You selected: {{selectedCar}}</h1>
+    <p class="two">Email Confirmed:
+      <select name="emailConfirmed" id="emailConfirmed" [(ngModel)]="user.emailConfirmed">
+        <option *ngFor="let i of items" [value]="i.value">
+          {{user.emailConfirmed}}</option>
+      </select>
+    </p>
+    <p class="two">Two Factor Enabled:
+      <select name="twoFactorEnabled" id="twoFactorEnabled" [(ngModel)]="user.twoFactorEnabled">
+        <option *ngFor="let i of items" [value]="i.value">
+          {{user.twoFactorEnabled}}</option>
+      </select>
+    </p>
+
     <div>
-      <a click="discard()" class="btn btn-primary btn-sm"><i class="fa fa-plus">Discard Changes</i></a>
-      <a click="save()" class="btn btn-primary btn-sm"><i class="fa fa-plus">Save Changes</i></a>
+      <a (click)="discard()" class="btn btn-primary btn-sm"><i class="fa fa-plus">Discard Changes</i></a>
+      <a (click)="save()" class="btn btn-primary btn-sm"><i class="fa fa-plus">Save Changes</i></a>
     </div>
   </div>
 </div>

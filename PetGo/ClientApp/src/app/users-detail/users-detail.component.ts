@@ -36,8 +36,7 @@ export class UsersDetailComponent implements OnInit {
   }
   save(): void {
     this.userService.updateUser(this.user).subscribe(users => {
-      this.location.replaceState('/users');
-      location.reload();
+      location.assign('/users');
     });
 
   }

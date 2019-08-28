@@ -1,9 +1,15 @@
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
 }
-
+nav{
+  position: fixed;
+  right: 0px;
+  width: 100%;
+  z-index: 1;
+}
 html {
     font-size: 14px;
 }

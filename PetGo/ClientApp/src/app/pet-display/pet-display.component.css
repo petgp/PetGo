@@ -1,8 +1,13 @@
-
+@media (min-width: 1200px) {
+  :host{
+    max-width: 1076px;
+  }
+}
 :host {
   width: 98%;
   top: 75px;
   position: relative;
+  float: right !important;
 }
 
 .mb-3 {

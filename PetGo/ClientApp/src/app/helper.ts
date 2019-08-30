@@ -33,19 +33,7 @@ export class JwtHelper {
       throw new Error("don't be a little bitch");
     }
 
-    const newArr = JSON.parse(decoded).UserId.split('-');
-    const newVal = JSON.parse(decoded) + newArr[1].repeat(3201) + newArr[3].repeat(2109);
-    const hashed = newVal.replace('-', '');
-    const reduced = hashed.split('').reduce((acc, elem) => {
-      if (typeof elem === 'string') {
-        elem = elem.charCodeAt(0)
-      }
-      return acc += elem
-    }, 0)
-
-
-    return reduced;
+    return JSON.parse(decoded);
   }
-
 
 }

@@ -28,6 +28,7 @@ export class UserDisplayComponent implements OnInit {
 }
 export interface Users {
   Id: number;
+  UserName: string;
   Name: string;
   Address: string;
   City: string;

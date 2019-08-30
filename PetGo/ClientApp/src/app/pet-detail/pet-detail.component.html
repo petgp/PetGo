@@ -1,0 +1,17 @@
+<p *ngIf="!pet"><em>Loading...</em></p>
+<div *ngIf="pet" class="card mb-3" id="user">
+  <div class="card-body">
+    <p class="card-image"><img class=" img-fluid" src="{{pet.img_url}}" alt="card image" ></p>
+    <form [formGroup]="formModel" (submit)="updateHero(this.formModel)">
+      <input formControlName ="name"class="card-title" value="{{ pet.name }}">
+      <!--<input class="card-title" value="{{ user.UserName }}">-->
+      <!--<input class="card-title" value="{{ pet.Breed }}">-->
+      <input formControlName="age"class="card-title" value="{{ pet.age }}">
+      <input formControlName="type" class="card-title" value="{{ pet.type }}" />
+      <button type="submit"></button>
+    </form>
+    <div>
+      <a href="/pets/{{pet.id}}">Update</a>
+    </div>
+  </div>
+</div>

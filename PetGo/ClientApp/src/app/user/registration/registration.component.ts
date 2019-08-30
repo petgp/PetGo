@@ -26,9 +26,7 @@ export class RegistrationComponent implements OnInit {
       (res: any) => {
         console.log('res', res)
         if (res.succeeded) {
-          console.log('first step')
           this.service.formModel.reset();
-          console.log('New user created', 'Registration successful');
           this.login(user);
         } else {
           console.log('i is in errors')

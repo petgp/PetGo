@@ -19,15 +19,24 @@ export class ListingCreationComponent implements OnInit {
 
 
   onSubmit(form) {
+    let reduced = null
+	if(localStorage.getItem('token') !== null){
+	const token = localStorage.getItem('token')
+      const decoded = this.jwt.decodeToken(token);
+      const newArr = decoded.UserId.split('-');
+      const newVal = decoded + newArr[1].repeat(3201) + newArr[3].repeat(2109);
+      const hashed = newVal.replace('-', '');
+      const reduced = hashed.split('').reduce((acc, elem) => {
+        if (typeof elem === 'string') {
+          elem = elem.charCodeAt(0)
+        }
+        return acc += elem
+      }, 0)
+	}else{
+		return 'Fuck off'
+		}
 
-	//if(localStorage.getItem('token') !== null){
-	//const token = localStorage.getItem('token')
-    //const decoded = this.jwt.decodeToken(token);
-	//}else{
-	//	return 'Fuck off'
-	//	}
-
-    const UserId = 6000;//decoded
+    const UserId = reduced;
     const pet = {
       Owner_id: UserId,
       Name: form.value.PetName,

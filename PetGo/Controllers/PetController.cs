@@ -12,34 +12,20 @@ namespace PetGo.Controllers
   public class PetController : Controller
   {
     [HttpGet]
-    public IEnumerable<Pet> GetPets()
+    public IActionResult GetPets()
     {
       try
       {
         using (var db = new DatabaseContext())
         {
           List<Pet> ret = db.Pets.ToList();
-          Response.StatusCode = 200;
-          //loop through the pets in the db
-          // foreach (var pet in db.Pets.ToList())
-          // {
-          //     var query = from b in db.Breeds
-          //                 where b.PetId == pet.Id
-          //                 select b.Title;
-          //     PetWithBreed updatedPet = new PetWithBreed(pet, query.ToList());
-
-          //     ret.Add(updatedPet);
-
-          // }
-          //return db.Pets.ToList();
-          return ret;
+          return Ok(ret);
         }
       }
       catch (Exception ex)
       {
-        Debug.WriteLine("catch: " + ex.ToString());
-        Response.StatusCode = 422;
-        return Enumerable.Empty<PetWithBreed>();
+        Debug.WriteLine("catch: " + ex.Message);
+        return UnprocessableEntity(ex.Message);
       }
     }
 
@@ -70,10 +56,8 @@ namespace PetGo.Controllers
       }
       catch (Exception ex)
       {
-        Debug.WriteLine("*************************************************\n");
         Debug.WriteLine(ex.ToString());
-        Debug.WriteLine("*************************************************\n");
-        return StatusCode(422, ex.Message);
+        return UnprocessableEntity(ex.Message);
       }
     }
 

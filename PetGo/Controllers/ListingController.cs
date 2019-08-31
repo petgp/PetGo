@@ -14,26 +14,24 @@ namespace PetGo.Controllers
 
 
     [HttpGet]
-    public IEnumerable<ListingWithPet> GetListings()
+    public IActionResult GetListings()
     {
-      Debug.WriteLine("~~~~~~~/n~~~~~/n");
       try
       {
         using (var db = new DatabaseContext())
         {
-          Response.StatusCode = 200;
 
           var query = from l in db.Listings
                       join p in db.Pets on l.PetId equals p.Id
                       select new ListingWithPet { listing = l, pet = p };
-          return query.ToList();
+          var result = query.ToList();
+          return Ok(result);
         }
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Error: " + ex);
-        Response.StatusCode = 422;
-        return Enumerable.Empty<ListingWithPet>();
+        Console.WriteLine("Error:" + ex);
+        return UnprocessableEntity(ex.Message);
       }
     }
 
@@ -42,8 +40,6 @@ namespace PetGo.Controllers
     {
       try
       {
-
-        //Need to add pet owner id to current pet object from before sending to database
         using (var db = new DatabaseContext())
         {
           db.Listings.Add(payload);
@@ -54,7 +50,7 @@ namespace PetGo.Controllers
       catch (Exception ex)
       {
         Console.WriteLine("Error: " + ex);
-        return StatusCode(422, ex.Message);
+        return UnprocessableEntity(ex.Message);
       }
     }
 

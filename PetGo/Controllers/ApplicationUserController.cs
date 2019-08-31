@@ -32,7 +32,7 @@ namespace PetGo.Controllers
     }
 
     [HttpGet]
-    public OkObjectResult GetAllUsers()
+    public ObjectResult GetAllUsers()
     {
       try
       {
@@ -42,7 +42,7 @@ namespace PetGo.Controllers
       catch (Exception ex)
       {
         Console.WriteLine(ex);
-        throw ex;
+        return UnprocessableEntity(ex.Message);
       }
     }
     [HttpGet("{id}")]
@@ -55,7 +55,8 @@ namespace PetGo.Controllers
       }
       catch (Exception ex)
       {
-        throw ex;
+        Console.WriteLine(ex);
+        return UnprocessableEntity(ex.Message);
       }
     }
     [HttpPost]
@@ -77,11 +78,11 @@ namespace PetGo.Controllers
         model.AccessFailedCount = user.AccessFailedCount;
         var result = await _userManager.UpdateAsync(model);
         return Ok();
-
       }
       catch (Exception ex)
       {
-        throw ex;
+        Console.WriteLine(ex);
+        return UnprocessableEntity(ex.Message);
       }
     }
     [HttpPost]
@@ -94,21 +95,17 @@ namespace PetGo.Controllers
       {
         UserName = model.UserName,
         Email = model.Email,
-        //Password = model.Password
       };
 
       try
       {
         var result = await _userManager.CreateAsync(applicationUser, model.Password);
         return Ok(result);
-        //string the = "the";
-        //JObject json = JObject.Parse(str);
-        //return res;
       }
       catch (Exception ex)
       {
-        string err = ex.Message;
-        throw ex;
+        Console.WriteLine(ex);
+        return UnprocessableEntity(ex.Message);
       }
     }
 

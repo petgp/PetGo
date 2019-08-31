@@ -13,9 +13,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { UserDisplayComponent } from './user-display/user-display.component';
 import { PetDisplayComponent } from './pet-display/pet-display.component';
 import { ListingDisplayComponent } from './listing-display/listing-display.component';
-import { MessageDisplayComponent } from './message-display/message-display.component';
 import { LoginComponent } from './user/login/login.component';
-import { SignupComponent } from './signup/signup.component';
 import { ActivityDisplayComponent } from './activity-display/activity-display.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserService } from './shared/user.service';
@@ -36,9 +34,7 @@ import { UsersDetailComponent } from './users-detail/users-detail.component';
     UserDisplayComponent,
     PetDisplayComponent,
     ListingDisplayComponent,
-    MessageDisplayComponent,
     LoginComponent,
-    SignupComponent,
     ActivityDisplayComponent,
     RegistrationComponent,
     UserComponent,
@@ -51,18 +47,6 @@ import { UsersDetailComponent } from './users-detail/users-detail.component';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', redirectTo: '/users', pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: RegistrationComponent },
-      { path: 'users', component: UserDisplayComponent, pathMatch: 'full' },
-      { path: 'users/:id', component: UsersDetailComponent },
-      { path: 'pets', component: PetDisplayComponent },
-      { path: 'listings', component: ListingDisplayComponent },
-      { path: 'messages', component: MessageDisplayComponent },
-      { path: 'listing-creation', component: ListingCreationComponent },
-    ])
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,

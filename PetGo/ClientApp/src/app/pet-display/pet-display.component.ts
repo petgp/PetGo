@@ -14,23 +14,15 @@ export class PetDisplayComponent {
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private messageService: MessageService) {
     http.get<Pet[]>(baseUrl + 'api/pets').subscribe(result => {
-      console.log('FETCHED');
-      console.log(result);
       this.pets = result;
-      this.log('fetched pets');
-    }, error => this.handleError('getPets', error));
+      this.messageService.log('FetchedPets');
+    }, error => this.messageService.handleError('getPets', error));
   }
   public validImg(img_url: string): string {
     if (validUrl.isUri(img_url)) {
       return img_url;
     }
     return './default-pet-icon.png';
-  }
-  private log(message: string) {
-    this.messageService.addMessage(`PetGoService: ${message}`);
-  }
-  private handleError(operation: string, error) {
-    this.log(`${operation} failed: ${error.message}`);
   }
 }
 

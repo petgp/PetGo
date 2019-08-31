@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
-//import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-
+import { MessageService } from '../../message.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styles: []
+  styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(public service: UserService, private router: Router) { }
+  constructor(public service: UserService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -21,18 +19,16 @@ export class RegistrationComponent implements OnInit {
       Email: form.value.Email,
       Password: form.value.Passwords.Password
     };
-
     this.service.register().subscribe(
       (res: any) => {
-        console.log('res', res)
         if (res.succeeded) {
-          console.log('first step')
           this.service.formModel.reset();
-          console.log('New user created', 'Registration successful');
+          this.messageService.log('UserCreated - Registration successful');
+          this.service.isLoggedIn = true;
           this.login(user);
         } else {
-          console.log('i is in errors')
           res.errors.forEach(element => {
+            this.service.isLoggedIn = false;
             switch (element.code) {
               case 'DuplicateUserName':
                 console.log('Username is already taken', 'Registration failed');
@@ -47,25 +43,27 @@ export class RegistrationComponent implements OnInit {
         }
       },
       err => {
-        
-        console.log('my error', err);
+        console.log(err);
+        this.messageService.handleError('UserCreate', err);
       }
     );
-    console.log("under func")
   }
 
   login(data) {
-    console.log('in login', data)
     this.service.login(data).subscribe(
       (res: any) => {
+        this.messageService.log('UserLogin - Registration successful');
         localStorage.setItem('token', res.token);
+        this.service.isLoggedIn = true;
         this.router.navigateByUrl('/home');
       },
       err => {
+        this.service.isLoggedIn = false;
         if (err.status === 400) {
           console.log('Incorrect email or password', 'Authentication failed');
         } else {
           console.log(err);
+          this.messageService.handleError('UserLogin', err);
         }
       }
     );

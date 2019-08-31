@@ -70,6 +70,7 @@ export class UserService {
   }
   logout() {
     this.messageService.log('User: ' + this.getUserId() + ' Logged Out');
+    this.isLoggedIn = false;
     localStorage.removeItem('token');
   }
   getUserId(): string {

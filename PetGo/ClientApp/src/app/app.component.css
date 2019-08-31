@@ -11,6 +11,10 @@
 }
 .container{
   float: right;
+
+}
+.container>div{
+  margin-top: 66px;
 }
 
 .side_bar{

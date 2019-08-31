@@ -14,6 +14,8 @@ export class PetDisplayComponent {
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private messageService: MessageService) {
     http.get<Pet[]>(baseUrl + 'api/pets').subscribe(result => {
+      console.log('FETCHED');
+      console.log(result);
       this.pets = result;
       this.log('fetched pets');
     }, error => this.handleError('getPets', error));
@@ -36,7 +38,7 @@ export class PetDisplayComponent {
 
 export interface Pet {
   id: number;
-  owner_id: number;
+  owner_id: string;
   name: string;
   type: string;
   img_url: string;

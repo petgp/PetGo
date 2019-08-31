@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ListingService } from '../shared/listing.service';
-//import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { JwtHelper } from '../helper';
 
 @Component({
@@ -20,12 +18,12 @@ export class ListingCreationComponent implements OnInit {
 
   onSubmit(form) {
 
-	//if(localStorage.getItem('token') !== null){
-	//const token = localStorage.getItem('token')
+    //if(localStorage.getItem('token') !== null){
+    //const token = localStorage.getItem('token')
     //const decoded = this.jwt.decodeToken(token);
-	//}else{
-	//	return 'Fuck off'
-	//	}
+    //}else{
+    //	return 'Fuck off'
+    //	}
 
     const UserId = 6000;//decoded
     const pet = {
@@ -47,21 +45,13 @@ export class ListingCreationComponent implements OnInit {
     }
 
     this.service.CreatePet(pet).subscribe(result => {
-      console.log('result', result);
       listing.PetId = result.id;
-      console.log('create pet was good');
-      this.service.CreateListing(listing).subscribe(result => {
-        console.log(result);
-        console.log('create listing was good');
+      this.service.CreateListing(listing).subscribe(() => {
         form.reset();
         this.router.navigate(['listings']);
       }, error => console.log(error));
     }, error => console.error(error));
-
-   
   }
-    
-   
 }
 
 

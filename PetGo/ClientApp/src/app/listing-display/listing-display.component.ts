@@ -25,11 +25,11 @@ export interface Listing {
   id: number;
   date: number;
   timeoutDate: number;
-  userId: number;
+  userId: string;
   petId: number;
   title: string;
   description: string;
-  toUserId: number;
+  toUserId: string;
 }
 
 interface ListingWithPet {

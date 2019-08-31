@@ -11,7 +11,7 @@ namespace PetGo.Models
     public int PetId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public int ToUserId { get; set; }
+    public string ToUserId { get; set; }
 
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListingService } from '../shared/listing.service';
 import { Router } from '@angular/router';
 import { JwtHelper } from '../helper';
-
+import { MessageService } from '../message.service';
 @Component({
   selector: 'app-listing-creation',
   templateUrl: './listing-creation.component.html',
@@ -10,7 +10,7 @@ import { JwtHelper } from '../helper';
 })
 export class ListingCreationComponent implements OnInit {
 
-  constructor(public service: ListingService, private router: Router, private jwt: JwtHelper) { }
+  constructor(public service: ListingService, private router: Router, private jwt: JwtHelper, private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -34,7 +34,7 @@ export class ListingCreationComponent implements OnInit {
       Age: form.value.Age,
       Ownership_length: form.value.Ownership_length,
       Breeds: ['shoez']
-    }
+    };
     const listing = {
       Date: Date.now(),
       TimeoutDate: Date.now() + (24 * 3600),
@@ -42,15 +42,23 @@ export class ListingCreationComponent implements OnInit {
       PetId: null,
       Title: form.value.Title,
       Description: form.value.Description
-    }
+    };
 
     this.service.CreatePet(pet).subscribe(result => {
       listing.PetId = result.id;
+      this.messageService.log('CreatePet');
       this.service.CreateListing(listing).subscribe(() => {
+        this.messageService.log('CreateListing');
         form.reset();
         this.router.navigate(['listings']);
-      }, error => console.log(error));
-    }, error => console.error(error));
+      }, error => {
+        console.log(error);
+        this.messageService.handleError('createListing', error);
+      });
+    }, error => {
+      console.error(error);
+      this.messageService.handleError('createListing', error);
+    });
   }
 }
 

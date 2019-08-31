@@ -5,12 +5,12 @@
 }
 :host {
   width: 98%;
-  top: 75px;
   position: relative;
   float: right !important;
 }
 
 .mb-3 {
+
   justify-content: center;
   display: flex;
   flex-direction: row;
@@ -24,6 +24,8 @@
 }
 
 .card {
+  border-color: #6a6e71;
+  background-color: floralwhite;
   margin: 5px;
   max-width: 214px !important;
 }

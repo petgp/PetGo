@@ -6,7 +6,13 @@
   top: 75px;
   position: absolute;
 }
-
+a{
+  float: right;
+  margin-top: -20px;
+  margin-right: 19px;
+  color: white;
+  font-size: 39px;
+}
 .mb-3 {
   margin: 0 auto;
   display: flex;
@@ -21,6 +27,8 @@
 }
 
 .card {
+  border-color: #6a6e71;
+  background-color: floralwhite;
   margin: 5px;
   max-width: 214px !important;
 }

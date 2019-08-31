@@ -11,14 +11,15 @@
 }
 .container{
   float: right;
-
+  margin-top: 75px;
+  margin-bottom: 50px;
 }
 .container>div{
   margin-top: 66px;
 }
 
 .side_bar{
-  background: #4d4d4d;
+  background: #222629;
   position: fixed;
   width: 300px;
   height: 100%;

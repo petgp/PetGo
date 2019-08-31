@@ -5,13 +5,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MessageService } from '../message.service';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { JwtHelper } from '../helper';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService) { }
-
+  public isLoggedIn = false;
+  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private jwt: JwtHelper) {
+    if (localStorage.getItem('token') !== null) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+  }
   // this is a form we built, it has the fields we need to send, with validators
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -62,33 +68,36 @@ export class UserService {
   login(formData) {
     return this.http.post('/api/ApplicationUser/Login', formData);
   }
+  logout() {
+    this.messageService.log('User: ' + this.getUserId() + ' Logged Out');
+    localStorage.removeItem('token');
+  }
+  getUserId(): string {
+    if (localStorage.getItem('token') !== null) {
+      const token = localStorage.getItem('token')
+      const decoded = this.jwt.decodeToken(token);
+      return decoded;
+    } else {
+      return 'Fuck off';
+    }
+  }
   getUsers(): Observable<Users[]> {
     return this.http.get<Users[]>('api/ApplicationUser').pipe(
-      tap(_ => this.log('fetched Users')),
-      catchError(this.handleError<Users[]>('getUsers', []))
+      tap(_ => this.messageService.log('FetchedUsers')),
+      catchError(this.messageService.handleError<Users[]>('getUsers', []))
     );
   }
   getSingleUser(id: string): Observable<Users> {
     return this.http.get<Users>('api/ApplicationUser/' + id).pipe(
-      tap(_ => this.log('fetched user ' + id)),
-      catchError(this.handleError<Users>('getUser'))
+      tap(_ => this.messageService.log('FetchedUser ' + id)),
+      catchError(this.messageService.handleError<Users>('getUser'))
     );
   }
   updateUser(user: Users): Observable<Users> {
     return this.http.post<Users>('/api/ApplicationUser/update', user).pipe(
-      tap(_ => this.log('updated user ' + user.id)),
-      catchError(this.handleError<Users>('updateUser'))
+      tap(_ => this.messageService.log('UpdatedUser ' + user.id)),
+      catchError(this.messageService.handleError<Users>('updateUser'))
     );
-  }
-  private log(message: string) {
-    this.messageService.addMessage(`PetGoService: ${message}`);
-  }
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
   }
 }
 export interface Users {

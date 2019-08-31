@@ -1,22 +1,15 @@
-
 <p *ngIf="!listingsWithPets"><em>Loading...</em></p>
+<a [routerLink]='["/listing-creation"]'><i>+</i></a>
 <div class=" mb-3" id="listingsWithPets">
   <div class="card" *ngFor="let listing of listingsWithPets">
     <div class="card-body text-center">
       <p>
-        <img class="img-fluid"
-             src="{{listing.pet.img_url}}"
-             alt="card image">
+        <img class="img-fluid" src="{{validImg(listing.pet.img_url)}}" alt="card image">
       </p>
       <h4 class="card-title">{{listing.listing.title}}</h4>
       <p> {{listing.listing.description}}</p>
       <!--<p>Ownership Length: {{listing.pet.ownership_length}}</p>-->
 
-
     </div>
   </div>
 </div>
-
-
-
-<div><a [routerLink]='["/listing-creation"]' class="btn btn-primary btn-sm"><i class="fa fa-plus">Edit</i></a></div>

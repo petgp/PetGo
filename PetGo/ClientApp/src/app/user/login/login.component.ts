@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from "../../shared/user.service";
 import { Router } from '@angular/router';
-//import { ToastrService } from 'ngx-toastr';
+import { MessageService } from '../../message.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     Email: '',
     Password: ''
   };
-  constructor(private service: UserService, private router: Router) { }
+  constructor(private service: UserService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     if (localStorage.getItem('token') != null) {
@@ -27,13 +27,17 @@ export class LoginComponent implements OnInit {
     this.service.login(form.value).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
-        this.router.navigateByUrl('/home');
+        this.messageService.log('UserLogin: ' + this.service.getUserId() + ' - Registration successful');
+        this.service.isLoggedIn = true;
+        this.router.navigateByUrl('/users');
       },
       err => {
+        this.service.isLoggedIn = false;
         if (err.status === 400) {
-          console.log('Incorrect username or password', 'Authentication faile');
+          console.log('Incorrect username or password', 'Authentication failed');
         } else {
           console.log(err);
+          this.messageService.handleError('UserLogin', err);
         }
       }
     );

@@ -5,6 +5,7 @@ a.navbar-brand {
     word-break: break-all;
 }
 nav{
+  background-color: #89c03e !important;
   position: fixed;
   right: 0px;
   width: 100%;

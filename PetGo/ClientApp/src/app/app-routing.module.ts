@@ -9,6 +9,7 @@ import { UserDisplayComponent } from './user-display/user-display.component';
 import { UsersDetailComponent } from './users-detail/users-detail.component';
 import { PetDisplayComponent } from './pet-display/pet-display.component';
 import { ListingDisplayComponent } from './listing-display/listing-display.component';
+import { ListingDetailComponent } from './listing-detail/listing-detail.component';
 import { ListingCreationComponent } from './listing-creation/listing-creation.component';
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'users', component: UserDisplayComponent, pathMatch: 'full' },
   { path: 'users/:id', component: UsersDetailComponent },
   { path: 'pets', component: PetDisplayComponent },
-  { path: 'listings', component: ListingDisplayComponent },
+  { path: 'listings', component: ListingDisplayComponent, pathMatch: 'full' },
+  { path: 'listings/:id', component: ListingDetailComponent },
   { path: 'listing-creation', component: ListingCreationComponent },
 ];
 

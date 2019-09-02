@@ -15,8 +15,11 @@ export class ListingDisplayComponent {
   
   public listingsWithPets: ListingWithPet[];
 
-  constructor(private router: Router, http: HttpClient, private messageService: MessageService, @Inject('BASE_URL') baseUrl: string) {
-    http.get<ListingWithPet[]>(baseUrl + 'api/listings').subscribe(result => {
+  constructor(
+    http: HttpClient,
+    private messageService: MessageService,
+    @Inject('BASE_URL') private baseUrl: string) {
+    http.get<ListingWithPet[]>(this.createURL('api/listings')).subscribe(result => {
       this.listingsWithPets = result;
       this.messageService.log('FetchedListings');
     }, error => this.messageService.handleError('getListings', error));
@@ -27,6 +30,8 @@ export class ListingDisplayComponent {
     }
     return './default-pet-icon.png';
   }
+  createURL(url: string): string {
+    return this.baseUrl + url;
 
   find(id){
     this.router.navigate([`/listings/${id}`]);

@@ -21,9 +21,11 @@ export class PetDisplayComponent {
     const token = localStorage.getItem('token')
     const decoded = this.jwt.decodeToken(token);
     
-
-    http.get<Pet[]>(baseUrl + 'api/pets').subscribe(result => {
-      this.pets = result.filter(res => res.owner_id === decoded)
+  constructor(http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    private messageService: MessageService) {
+    http.get<Pet[]>(this.createURL('api/pets')).subscribe(result => {
+      this.pets = result;
       this.messageService.log('FetchedPets');
     }, error => this.messageService.handleError('getPets', error));
   }
@@ -38,6 +40,9 @@ export class PetDisplayComponent {
   // deletePet(id: number){
   //   this.listingService.deleteListPet(id).subscribe((result) => console.log('finished'))
   // }
+  createURL(url: string): string {
+    return this.baseUrl + url;
+  }
 }
 
 

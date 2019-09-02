@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../message.service';
 import validUrl from 'valid-url';
 import { JwtHelper } from '../helper';
+import { ListingService } from '../shared/listing.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pet-display',
@@ -14,7 +16,7 @@ export class PetDisplayComponent {
   public pets: Pet[];
   
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private messageService: MessageService, private jwt: JwtHelper) {
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private messageService: MessageService, private jwt: JwtHelper, private listingService: ListingService) {
 
     const token = localStorage.getItem('token')
     const decoded = this.jwt.decodeToken(token);
@@ -25,12 +27,17 @@ export class PetDisplayComponent {
       this.messageService.log('FetchedPets');
     }, error => this.messageService.handleError('getPets', error));
   }
+
   public validImg(img_url: string): string {
     if (validUrl.isUri(img_url)) {
       return img_url;
     }
     return './default-pet-icon.png';
   }
+
+  // deletePet(id: number){
+  //   this.listingService.deleteListPet(id).subscribe((result) => console.log('finished'))
+  // }
 }
 
 
@@ -41,7 +48,7 @@ export interface Pet {
   name: string;
   type: string;
   img_url: string;
-  breeds: string[];
+  // breeds: string[];
   breed: string;
   age: number;
   ownership_length: number;

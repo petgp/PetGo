@@ -68,6 +68,30 @@ namespace PetGo.Controllers
       }
     }
 
+  [HttpPut]
+  [Route("update")]
+
+  public async Task<Object> UpdateListing([FromBody] Listing list){
+    try{
+      using(var db = new DatabaseContext()){
+        var l = await db.Listings.FindAsync(list.Id);
+        l.PetId = list.PetId;
+        l.Title = list.Title;
+        l.ToUserId = list.ToUserId;
+        l.UserId = list.UserId;
+        l.Description = list.Description;
+        l.TimeoutDate = list.TimeoutDate;
+        l.Date = list.Date;
+        db.Update(l);
+        db.SaveChanges();
+        return Ok(l);
+      }
+    }catch(Exception ex){
+      return UnprocessableEntity(ex.Message);
+    }
+  }
+
+
     //[HttpDelete]
     //public IActionResult DeleteListing([FromBody] string payload)
     //{

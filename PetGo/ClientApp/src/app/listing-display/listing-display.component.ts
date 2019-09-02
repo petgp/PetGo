@@ -44,7 +44,7 @@ export interface Listing {
   toUserId: string;
 }
 
-interface ListingWithPet {
+export interface ListingWithPet {
   listing: Listing;
   pet: Pet;
 }

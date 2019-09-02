@@ -1,0 +1,11 @@
+<p *ngIf="!pet || !list"><em>Loading...</em></p>
+<div *ngIf="pet && list" class="card mb-3" id="user">
+    <div class="card-body">
+        <p class="card-image"><img src="{{validImg(pet.img_url)}}" alt="card image" class="img-fluid"></p>
+        <p>Name: <input [(ngModel)]="pet.name" class="card-title" value="{{pet.name}}"/></p>
+        <p>Ownership Length: <input [(ngModel)]="pet.ownership_length" class="card-title" value="{{pet.ownership_length}}"/></p>
+        <p>Age: <input [(ngModel)]="pet.age" class="card-title" value="{{pet.age}}"/></p>
+        <p>Description: <input [(ngModel)]="list.description" class="card-title" value="{{list.description}}"/></p>
+    </div>
+    <button (click)="save()">button</button>
+</div>

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Pet, PetDisplayComponent } from     '../pet-display/pet-display.component';
 import { MessageService } from '../message.service';
-import { Listing } from '../listing-display/listing-display.component';
+import { Listing, ListingWithPet } from '../listing-display/listing-display.component';
 import{Observable} from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
@@ -49,6 +49,26 @@ export class ListingService {
     return this.http.get<List>('/api/listings/' + id).pipe(tap(_ => this.messageService.log("FetchedListing " + id)),
     catchError(this.messageService.handleError<List>("foundlisting"))
     )}
+
+
+  getSinglePet(id: number){
+
+    return this.http.get(`/api/pets/${id}`).pipe(tap(_ => this.messageService.log("FetchedListing " + id)),catchError(this.messageService.handleError("found Listing")))
+  }
+
+  updateMyPet(payload: Pet): Observable<Pet> {
+    console.log('pet', payload.id)
+    
+    return this.http.put<Pet>(`/api/pets/update`, payload)
+  }
+  updateListing(payload: List): Observable<List> {
+    console.log('list', payload)
+    return this.http.put<List>('api/listings/update', payload)
+  }
+
+  // deleteListPet(id: number): Observable<List> {
+  //   return this.http.delete<List>(`api/pets/${id}`)
+  // }
   
 }
 
@@ -62,3 +82,5 @@ export interface List {
   description: string;
   toUserId: string;
 }
+
+

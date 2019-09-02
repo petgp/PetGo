@@ -56,7 +56,7 @@ export interface List {
   id: number;
   date: string;
   timeoutDate: string;
-  UserId: string;
+  userId: string;
   petId: number;
   title: string;
   description: string;

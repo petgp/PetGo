@@ -19,3 +19,15 @@ Database Schema - https://docs.google.com/drawings/d/1FMT98OL3nrnMpvyeR36b9uf3Xk
 * `npm install`
 * `cd ..`
 * `dotnet run`
+
+### Deploying changes to server:
+* `cd PetGo/PetGo`
+* `heroku git:remote -a thawing-everglades-61111`
+* `heroku container:push web`
+* `heroku container:release web`
+
+### Deploying changes to Client
+* `cd PetGo/PetGo/ClientAppo`
+* `heroku git:remote -a warm-fjord-86761`
+* `heroku container:push web`
+* `heroku container:release web`

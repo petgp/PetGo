@@ -17,7 +17,7 @@ import validUrl from 'valid-url';
 })
 export class PetDetailComponent implements OnInit {
   @Input() pet: Pet;
-           list: List;
+  @Input() list: List;
            listingWithPet: ListingWithPet
 
   constructor(
@@ -29,9 +29,9 @@ export class PetDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
     
-    this.listingService.getSinglePet(id).subscribe(({pet,listing}) => {
-      this.pet = pet;
-      this.list = listing;
+    this.listingService.getSinglePet(id).subscribe((result: ListingWithPet) => {
+      this.list = result.listing
+      this.pet = result.pet
     });
     
   }

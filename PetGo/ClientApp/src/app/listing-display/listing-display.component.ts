@@ -35,8 +35,8 @@ export class ListingDisplayComponent {
 
 export interface Listing {
   id: number;
-  date: number;
-  timeoutDate: number;
+  date: string;
+  timeoutDate: string;
   userId: string;
   petId: number;
   title: string;

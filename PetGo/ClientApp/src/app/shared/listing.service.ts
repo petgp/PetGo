@@ -2,8 +2,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Pet } from '../pet-display/pet-display.component';
+import { Pet, PetDisplayComponent } from     '../pet-display/pet-display.component';
+import { MessageService } from '../message.service';
 import { Listing } from '../listing-display/listing-display.component';
+import{Observable} from 'rxjs'
+import { catchError, map, tap } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,4 +43,20 @@ export class ListingService {
   createURL(url: string): string {
     return this.baseUrl + url;
   }
+  getSingleListing(id: number): Observable<List> {
+    return this.http.get<List>('/api/listings/' + id).pipe(tap(_ => this.messageService.log("FetchedListing " + id)),
+    catchError(this.messageService.handleError<List>("foundlisting"))
+    )}
+
+}
+
+export interface List {
+  id: number;
+  date: string;
+  timeoutDate: string;
+  userId: string;
+  petId: number;
+  title: string;
+  description: string;
+  toUserId: string;
 }

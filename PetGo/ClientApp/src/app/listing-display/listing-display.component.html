@@ -9,7 +9,7 @@
       <h4 class="card-title">{{listing.listing.title}}</h4>
       <p> {{listing.listing.description}}</p>
       <!--<p>Ownership Length: {{listing.pet.ownership_length}}</p>-->
-
+      <h2 routerLink="{{listing.listing.id}}" (click)="find(listing.listing.id)">View Listing</h2>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../message.service';
 import validUrl from 'valid-url';
+import { JwtHelper } from '../helper';
 
 @Component({
   selector: 'app-pet-display',
@@ -11,7 +12,13 @@ import validUrl from 'valid-url';
 export class PetDisplayComponent {
 
   public pets: Pet[];
+  
 
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private messageService: MessageService, private jwt: JwtHelper) {
+
+    const token = localStorage.getItem('token')
+    const decoded = this.jwt.decodeToken(token);
+    
   constructor(http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
     private messageService: MessageService) {

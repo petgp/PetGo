@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PetGo.Models;
+using System.Threading.Tasks;
 
 namespace PetGo.Controllers
 {
@@ -50,6 +51,19 @@ namespace PetGo.Controllers
       catch (Exception ex)
       {
         Console.WriteLine("Error: " + ex);
+        return UnprocessableEntity(ex.Message);
+      }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<Object> GetSingleListing(int id){
+      try{
+        using(var db = new DatabaseContext()){
+          Listing payload = await db.Listings.FindAsync(id);
+          return Ok(payload);
+        }
+      }catch(Exception ex){
+        Console.WriteLine(ex.Message);
         return UnprocessableEntity(ex.Message);
       }
     }

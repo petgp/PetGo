@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Pet } from '../pet-display/pet-display.component';
 import { MessageService } from '../message.service';
 import validUrl from 'valid-url';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-listing-display',
@@ -11,7 +12,7 @@ import validUrl from 'valid-url';
 })
 export class ListingDisplayComponent {
 
-
+  
   public listingsWithPets: ListingWithPet[];
 
   constructor(
@@ -31,6 +32,9 @@ export class ListingDisplayComponent {
   }
   createURL(url: string): string {
     return this.baseUrl + url;
+
+  find(id){
+    this.router.navigate([`/listings/${id}`]);
   }
 }
 

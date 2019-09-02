@@ -13,11 +13,10 @@ Database Schema - https://docs.google.com/drawings/d/1FMT98OL3nrnMpvyeR36b9uf3Xk
 
 ### MacOS/Linux
  
-* `cd PetGo`
-* `dotnet build`
-* `cd ClientApp`
+* `cd PetGo/ClientApp`
 * `npm install`
 * `cd ..`
+* `dotnet build`
 * `dotnet run`
 
 ### Deploying changes to server:

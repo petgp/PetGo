@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserComponent } from './user/user.component';
 import { ListingCreationComponent } from './listing-creation/listing-creation.component';
 import { UsersDetailComponent } from './users-detail/users-detail.component';
+import { ListingDetailComponent } from './listing-detail/listing-detail.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UsersDetailComponent } from './users-detail/users-detail.component';
     RegistrationComponent,
     UserComponent,
     ListingCreationComponent,
-    UsersDetailComponent
+    UsersDetailComponent,
+    ListingDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

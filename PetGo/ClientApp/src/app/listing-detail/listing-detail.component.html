@@ -1,0 +1,9 @@
+<p *ngIf="!list || !user"><em>Loading...</em></p>
+<div *ngIf="list && user" class="card mb-3" id="list">
+    <div class="card-body">
+        <p class="card-image"><img src="./default-user-icon.jpg" alt="card-image" class="img-fluid"></p>
+        <p>User: <input [(ngModel)]="user.email" class="card-title" value="{{user.email}}"/></p>
+        <p>Name: <input [(ngModel)]="list.title" class="card-title" value="{{list.title}}"/></p>
+        <p>Desc: <input [(ngModel)]="list.description" class="card-title" value="{{list.description}}"/></p>
+    </div>
+</div>

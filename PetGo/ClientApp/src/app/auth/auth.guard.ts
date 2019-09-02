@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       // in [] form because it is 'navigate'. I think navigateByUrl you only need a string
-      this.router.navigate(['/user/login']);
+      this.router.navigate(['/login']);
       return false;
     }
   }

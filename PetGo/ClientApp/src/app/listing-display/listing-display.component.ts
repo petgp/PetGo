@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Pet } from '../pet-display/pet-display.component';
 import { MessageService } from '../message.service';
 import validUrl from 'valid-url';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-listing-display',
@@ -11,10 +12,10 @@ import validUrl from 'valid-url';
 })
 export class ListingDisplayComponent {
 
-
+  
   public listingsWithPets: ListingWithPet[];
 
-  constructor(http: HttpClient, private messageService: MessageService, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private router: Router, http: HttpClient, private messageService: MessageService, @Inject('BASE_URL') baseUrl: string) {
     http.get<ListingWithPet[]>(baseUrl + 'api/listings').subscribe(result => {
       this.listingsWithPets = result;
       this.messageService.log('FetchedListings');
@@ -25,6 +26,10 @@ export class ListingDisplayComponent {
       return img_url;
     }
     return './default-pet-icon.png';
+  }
+
+  find(id){
+    this.router.navigate([`/listings/${id}`]);
   }
 }
 

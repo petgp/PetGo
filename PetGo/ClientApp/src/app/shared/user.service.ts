@@ -89,7 +89,7 @@ export class UserService {
     );
   }
   getSingleUser(id: string): Observable<Users> {
-    return this.http.get<Users>('api/ApplicationUser/' + id).pipe(
+    return this.http.get<Users>('/api/ApplicationUser/' + id).pipe(
       tap(_ => this.messageService.log('FetchedUser ' + id)),
       catchError(this.messageService.handleError<Users>('getUser'))
     );

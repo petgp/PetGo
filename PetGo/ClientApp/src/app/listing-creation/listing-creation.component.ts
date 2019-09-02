@@ -17,15 +17,15 @@ export class ListingCreationComponent implements OnInit {
 
 
   onSubmit(form) {
+    let decoded;
+    if(localStorage.getItem('token') !== null){
+    const token = localStorage.getItem('token')
+    decoded = this.jwt.decodeToken(token);
+    }else{
+    	return 'Fuck off'
+    	}
 
-    //if(localStorage.getItem('token') !== null){
-    //const token = localStorage.getItem('token')
-    //const decoded = this.jwt.decodeToken(token);
-    //}else{
-    //	return 'Fuck off'
-    //	}
-
-    const UserId = 6000;//decoded
+    const UserId = decoded
     const pet = {
       Owner_id: UserId,
       Name: form.value.PetName,

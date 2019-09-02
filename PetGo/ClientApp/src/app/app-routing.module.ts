@@ -13,7 +13,7 @@ import { ListingDetailComponent } from './listing-detail/listing-detail.componen
 import { ListingCreationComponent } from './listing-creation/listing-creation.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/user/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'user', component: UserComponent,
     children: [
@@ -22,16 +22,17 @@ const routes: Routes = [
     ]
   },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/users', pathMatch: 'full' },
+  { path: '', redirectTo: '/users', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegistrationComponent },
-  { path: 'users', component: UserDisplayComponent, pathMatch: 'full' },
-  { path: 'users/:id', component: UsersDetailComponent },
-  { path: 'pets', component: PetDisplayComponent },
-  { path: 'listings', component: ListingDisplayComponent, pathMatch: 'full' },
-  { path: 'listings/:id', component: ListingDetailComponent },
-  { path: 'listing-creation', component: ListingCreationComponent },
+  { path: 'users', component: UserDisplayComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UsersDetailComponent, canActivate: [AuthGuard] },
+  { path: 'pets', component: PetDisplayComponent, canActivate: [AuthGuard] },
+  { path: 'listings', component: ListingDisplayComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'listings/:id', component: ListingDetailComponent, canActivate: [AuthGuard] },
+  { path: 'listing-creation', component: ListingCreationComponent, canActivate: [AuthGuard] },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

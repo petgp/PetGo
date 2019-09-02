@@ -46,8 +46,8 @@ namespace PetGo
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
       services.AddDefaultIdentity<ApplicationUser>()
-          .AddEntityFrameworkStores<AuthenticationContext>()
-          .AddDefaultTokenProviders();
+        .AddEntityFrameworkStores<AuthenticationContext>()
+        .AddDefaultTokenProviders();
       services.Configure<IdentityOptions>(options =>
       {
         options.Password.RequireDigit = false;
@@ -111,31 +111,32 @@ namespace PetGo
       }
 
       app.UseCors(builder =>
-         builder.WithOrigins("https://localhost:5001")
-         .AllowAnyHeader()
-         .AllowAnyMethod());
+       builder.WithOrigins(
+         "https://localhost:5001",
+         "https://warm-fjord-86761.herokuapp.com")
+       .AllowAnyHeader()
+       .AllowAnyMethod());
       app.UseAuthentication();
       app.UseHttpsRedirection();
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
 
       app.UseMvc(
-          routes =>
-          {
-            routes.MapRoute(
-                      name: "default",
-                      template: "{controller}/{action=Index}/{id?}");
-          });
+        routes =>
+        {
+          routes.MapRoute(
+            name: "default",
+            template: "{controller}/{action=Index}/{id?}");
+        });
 
       app.UseSpa(spa =>
       {
         // To learn more about options for serving an Angular SPA from ASP.NET Core,
         // see https://go.microsoft.com/fwlink/?linkid=864501
 
-        spa.Options.SourcePath = "ClientApp";
-
         if (env.IsDevelopment())
         {
+          spa.Options.SourcePath = "ClientApp";
           spa.UseAngularCliServer(npmScript: "start");
         }
       });

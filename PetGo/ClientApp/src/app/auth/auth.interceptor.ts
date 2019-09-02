@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-
 // this component is basically used to sign a user in using their 'token'
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

@@ -12,8 +12,10 @@ export class PetDisplayComponent {
 
   public pets: Pet[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private messageService: MessageService) {
-    http.get<Pet[]>(baseUrl + 'api/pets').subscribe(result => {
+  constructor(http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    private messageService: MessageService) {
+    http.get<Pet[]>(this.createURL('api/pets')).subscribe(result => {
       this.pets = result;
       this.messageService.log('FetchedPets');
     }, error => this.messageService.handleError('getPets', error));
@@ -23,6 +25,9 @@ export class PetDisplayComponent {
       return img_url;
     }
     return './default-pet-icon.png';
+  }
+  createURL(url: string): string {
+    return this.baseUrl + url;
   }
 }
 

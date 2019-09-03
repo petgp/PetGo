@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Pet } from '../pet-display/pet-display.component';
 import { MessageService } from '../message.service';
 import validUrl from 'valid-url';
 import { Router } from '@angular/router';
-
+import { Listing, ListingWithPet } from '../shared/listing.service';
 @Component({
   selector: 'app-listing-display',
   templateUrl: './listing-display.component.html',
@@ -39,18 +38,4 @@ export class ListingDisplayComponent {
   }
 }
 
-export interface Listing {
-  id: number;
-  date: string;
-  timeoutDate: string;
-  userId: string;
-  petId: number;
-  title: string;
-  description: string;
-  toUserId: string;
-}
 
-export interface ListingWithPet {
-  listing: Listing;
-  pet: Pet;
-}

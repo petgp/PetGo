@@ -15,14 +15,6 @@ import { ListingCreationComponent } from './listing-creation/listing-creation.co
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {
-    path: 'user', component: UserComponent,
-    children: [
-      { path: 'registration', component: RegistrationComponent },
-      { path: 'login', component: LoginComponent },
-    ]
-  },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/users', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegistrationComponent },

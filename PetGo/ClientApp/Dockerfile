@@ -8,7 +8,7 @@ RUN npm install --production
 
 COPY . .
 
-RUN npm run build --prod
+RUN NODE_ENV=production npm install
 
 # Stage 2
 FROM nginx:1.13.12-alpine

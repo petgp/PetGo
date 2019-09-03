@@ -4,10 +4,24 @@ import { Injectable, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Pet, PetDisplayComponent } from '../pet-display/pet-display.component';
 import { MessageService } from '../message.service';
-import { Listing, ListingWithPet } from '../listing-display/listing-display.component';
 import { Observable } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
-import { Title } from '@angular/platform-browser';
+
+export interface Listing {
+  id: number;
+  date: string;
+  timeoutDate: string;
+  userId: string;
+  petId: number;
+  title: string;
+  description: string;
+  toUserId: string;
+}
+export interface ListingWithPet {
+  listing: Listing;
+  pet: Pet;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,9 +58,9 @@ export class ListingService {
   createURL(url: string): string {
     return this.baseUrl + url;
   }
-  getSingleListing(id: number): Observable<List> {
-    return this.http.get<List>('/api/listings/' + id).pipe(tap(_ => this.messageService.log("FetchedListing " + id)),
-      catchError(this.messageService.handleError<List>("foundlisting"))
+  getSingleListing(id: number): Observable<Listing> {
+    return this.http.get<Listing>('/api/listings/' + id).pipe(tap(_ => this.messageService.log("FetchedListing " + id)),
+      catchError(this.messageService.handleError<Listing>("foundlisting"))
     )
   }
 
@@ -57,13 +71,13 @@ export class ListingService {
   }
 
   updateMyPet(payload: Pet): Observable<Pet> {
-    console.log('pet', payload.id)
+    console.log('pet', payload.id);
 
     return this.http.put<Pet>(`/api/pets/update`, payload)
   }
-  updateListing(payload: List): Observable<List> {
+  updateListing(payload: Listing): Observable<Listing> {
     console.log('list', payload)
-    return this.http.put<List>('api/listings/update', payload)
+    return this.http.put<Listing>('api/listings/update', payload);
   }
 
   // deleteListPet(id: number): Observable<List> {
@@ -72,15 +86,6 @@ export class ListingService {
 
 }
 
-export interface List {
-  id: number;
-  date: string;
-  timeoutDate: string;
-  userId: string;
-  petId: number;
-  title: string;
-  description: string;
-  toUserId: string;
-}
+
 
 

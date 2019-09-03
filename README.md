@@ -18,4 +18,4 @@ Database Schema - https://docs.google.com/drawings/d/1FMT98OL3nrnMpvyeR36b9uf3Xk
 
 ### Deploying changes to server:
 * `cd PetGo/PetGo/ClientApp`
-* `npm run install-dev`
+* `npm run deploy`

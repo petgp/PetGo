@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Pet } from "../pet-display/pet-display.component";
-import { ListingService, Listing, ListingWithPet } from "../shared/listing.service";
+import { ListingService, Listing, ListingWithPet, Pet } from "../shared/listing.service";
 import validUrl from 'valid-url';
 
 

@@ -2,7 +2,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Pet, PetDisplayComponent } from '../pet-display/pet-display.component';
 import { MessageService } from '../message.service';
 import { Observable } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
@@ -17,6 +16,18 @@ export interface Listing {
   description: string;
   toUserId: string;
 }
+export interface Pet {
+  id: number;
+  owner_id: string;
+  name: string;
+  type: string;
+  img_url: string;
+  // breeds: string[];
+  breed: string;
+  age: number;
+  ownership_length: number;
+}
+
 export interface ListingWithPet {
   listing: Listing;
   pet: Pet;

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../message.service';
 import validUrl from 'valid-url';
 import { JwtHelper } from '../helper';
-import { ListingService } from '../shared/listing.service';
+import { ListingService, Pet } from '../shared/listing.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -43,16 +43,4 @@ export class PetDisplayComponent {
   createURL(url: string): string {
     return this.baseUrl + url;
   }
-}
-
-export interface Pet {
-  id: number;
-  owner_id: string;
-  name: string;
-  type: string;
-  img_url: string;
-  // breeds: string[];
-  breed: string;
-  age: number;
-  ownership_length: number;
 }

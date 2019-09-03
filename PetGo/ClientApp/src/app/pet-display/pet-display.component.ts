@@ -14,16 +14,16 @@ import { Observable } from 'rxjs';
 export class PetDisplayComponent {
 
   public pets: Pet[];
-  
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private messageService: MessageService, private jwt: JwtHelper, private listingService: ListingService) {
 
-    const token = localStorage.getItem('token')
-    const decoded = this.jwt.decodeToken(token);
-    
-  constructor(http: HttpClient,
+  constructor(
+    http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private jwt: JwtHelper,
+    private listingService: ListingService) {
+    // const token = localStorage.getItem('token');
+    // const decoded = this.jwt.decodeToken(token);
     http.get<Pet[]>(this.createURL('api/pets')).subscribe(result => {
       this.pets = result;
       this.messageService.log('FetchedPets');
@@ -45,8 +45,6 @@ export class PetDisplayComponent {
   }
 }
 
-
-
 export interface Pet {
   id: number;
   owner_id: string;
@@ -57,5 +55,4 @@ export interface Pet {
   breed: string;
   age: number;
   ownership_length: number;
-
 }

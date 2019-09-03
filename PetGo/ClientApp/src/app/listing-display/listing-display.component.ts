@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Pet } from '../pet-display/pet-display.component';
 import { MessageService } from '../message.service';
 import validUrl from 'valid-url';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listing-display',
@@ -12,13 +12,14 @@ import {Router} from '@angular/router'
 })
 export class ListingDisplayComponent {
 
-  
+
   public listingsWithPets: ListingWithPet[];
 
   constructor(
     http: HttpClient,
     private messageService: MessageService,
-    @Inject('BASE_URL') private baseUrl: string) {
+    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router) {
     http.get<ListingWithPet[]>(this.createURL('api/listings')).subscribe(result => {
       this.listingsWithPets = result;
       this.messageService.log('FetchedListings');
@@ -32,8 +33,8 @@ export class ListingDisplayComponent {
   }
   createURL(url: string): string {
     return this.baseUrl + url;
-
-  find(id){
+  }
+  find(id) {
     this.router.navigate([`/listings/${id}`]);
   }
 }

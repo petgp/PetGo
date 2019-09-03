@@ -24,6 +24,8 @@ import { UserComponent } from './user/user.component';
 import { ListingCreationComponent } from './listing-creation/listing-creation.component';
 import { UsersDetailComponent } from './users-detail/users-detail.component';
 import { ListingDetailComponent } from './listing-detail/listing-detail.component';
+import { PetDetailComponent } from './pet-detail/pet-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { ListingDetailComponent } from './listing-detail/listing-detail.componen
     UserComponent,
     ListingCreationComponent,
     UsersDetailComponent,
-    ListingDetailComponent
+    ListingDetailComponent,
+    PetDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

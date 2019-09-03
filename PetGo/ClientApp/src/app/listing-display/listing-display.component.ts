@@ -40,8 +40,8 @@ export class ListingDisplayComponent {
 
 export interface Listing {
   id: number;
-  date: number;
-  timeoutDate: number;
+  date: string;
+  timeoutDate: string;
   userId: string;
   petId: number;
   title: string;
@@ -49,7 +49,7 @@ export interface Listing {
   toUserId: string;
 }
 
-interface ListingWithPet {
+export interface ListingWithPet {
   listing: Listing;
   pet: Pet;
 }

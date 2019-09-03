@@ -6,7 +6,7 @@ import { environment } from './environments/environment';
 
 export function getBaseUrl() {
   if (environment.production) {
-    return 'https://thawing-everglades-61111.herokuapp.com';
+    return 'https://thawing-everglades-61111.herokuapp.com/';
   } else {
     return document.getElementsByTagName('base')[0].href;
   }

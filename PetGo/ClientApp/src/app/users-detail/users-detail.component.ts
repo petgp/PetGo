@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../message.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService, Users } from '../shared/user.service';
-
 @Component({
   selector: 'app-users-detail',
   templateUrl: './users-detail.component.html',
@@ -26,6 +25,7 @@ export class UsersDetailComponent implements OnInit {
   constructor(
     private location: Location,
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService) { }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -36,7 +36,7 @@ export class UsersDetailComponent implements OnInit {
   }
   save(): void {
     this.userService.updateUser(this.user).subscribe(users => {
-      location.assign('/users');
+      this.router.navigateByUrl('/users');
     });
 
   }

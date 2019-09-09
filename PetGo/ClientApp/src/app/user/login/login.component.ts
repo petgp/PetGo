@@ -11,7 +11,6 @@ import { MessageService } from '../../message.service';
 })
 export class LoginComponent implements OnInit {
   formModel = {
-    // Username: '',
     Email: '',
     Password: ''
   };
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('token') != null) {
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/login');
     }
   }
 

@@ -10,22 +10,21 @@ import * as $ from 'jquery';
 export class ActivityDisplayComponent implements OnInit {
   public messagesHidden = true;
   constructor(public messageService: MessageService) { }
-  displayMessages() {
-    this.messagesHidden = !this.messagesHidden;
+  ngOnInit() {
+    this.messageService.addDelegate(this);
   }
-  clearMessages() {
-    this.messageService.clear();
+  userAccessedData() {
+    this.updateView();
   }
   updateView() {
     if ($('#users').length) {
       $('.scrollable').animate({ scrollTop: $('.scrollable')[0].scrollHeight }, 300);
     }
   }
-  userAccessedData() {
-    this.updateView();
+  displayMessages() {
+    this.messagesHidden = !this.messagesHidden;
   }
-  ngOnInit() {
-    this.messageService.addDelegate(this);
+  clearMessages() {
+    this.messageService.clear();
   }
-
 }

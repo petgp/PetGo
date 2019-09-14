@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Location } from "@angular/common";
-import { Pet } from "../pet-display/pet-display.component";
-import { ListingService, List } from "../shared/listing.service";
-import { ListingWithPet } from "../listing-display/listing-display.component";
+import { ListingService, Listing, ListingWithPet, Pet } from "../shared/listing.service";
 import validUrl from 'valid-url';
 
 @Component({
@@ -13,7 +10,7 @@ import validUrl from 'valid-url';
 })
 export class PetDetailComponent implements OnInit {
   @Input() pet: Pet;
-  @Input() list: List;
+  @Input() list: Listing;
   listingWithPet: ListingWithPet;
 
   constructor(

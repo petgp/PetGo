@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+
+import { Injectable, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from './message.service';
@@ -12,7 +13,12 @@ import { JwtHelper } from '../helper';
 
 export class UserService {
   public isLoggedIn = false;
-  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private jwt: JwtHelper) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private messageService: MessageService,
+    private jwt: JwtHelper,
+    @Inject('BASE_URL') private baseUrl: string) {
     if (localStorage.getItem('token') !== null) {
       this.isLoggedIn = true;
     } else {
@@ -47,10 +53,11 @@ export class UserService {
       Email: this.formModel.value.Email,
       Password: this.formModel.value.Passwords.Password,
     };
-    return this.http.post('/api/ApplicationUser/Register', body);
+    return this.http.post(this.createURL('api/ApplicationUser/Register'), body);
+
   }
   login(formData) {
-    return this.http.post('/api/ApplicationUser/Login', formData);
+    return this.http.post(this.createURL('api/ApplicationUser/Login'), formData);
   }
   logout() {
     this.messageService.log('User: ' + this.getUserId() + ' Logged Out');
@@ -66,22 +73,25 @@ export class UserService {
     }
   }
   getUsers(): Observable<Users[]> {
-    return this.http.get<Users[]>('api/ApplicationUser').pipe(
+    return this.http.get<Users[]>(this.createURL('api/ApplicationUser')).pipe(
       tap(_ => this.messageService.log('FetchedUsers')),
       catchError(this.messageService.handleError<Users[]>('getUsers', []))
     );
   }
   getSingleUser(id: string): Observable<Users> {
-    return this.http.get<Users>('/api/ApplicationUser/' + id).pipe(
+    return this.http.get<Users>(this.createURL('api/ApplicationUser/' + id)).pipe(
       tap(_ => this.messageService.log('FetchedUser ' + id)),
       catchError(this.messageService.handleError<Users>('getUser'))
     );
   }
   updateUser(user: Users): Observable<Users> {
-    return this.http.post<Users>('/api/ApplicationUser/update', user).pipe(
+    return this.http.post<Users>(this.createURL('api/ApplicationUser/update'), user).pipe(
       tap(_ => this.messageService.log('UpdatedUser ' + user.id)),
       catchError(this.messageService.handleError<Users>('updateUser'))
     );
+  }
+  createURL(url: string): string {
+    return this.baseUrl + url;
   }
 }
 export interface Users {

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../shared/message.service';
 import validUrl from 'valid-url';
 import { JwtHelper } from '../helper';
-import { ListingService } from '../shared/listing.service';
+import { Pet } from '../shared/listing.service';
 
 @Component({
   selector: 'app-pet-display',
@@ -15,7 +15,7 @@ export class PetDisplayComponent {
   public pets: Pet[];
 
   constructor(http: HttpClient,
-    @Inject('BASE_URL') baseUrl: string,
+    @Inject('BASE_URL') private baseUrl: string,
     private messageService: MessageService,
     private jwt: JwtHelper) {
     const token = localStorage.getItem('token');
@@ -34,15 +34,7 @@ export class PetDisplayComponent {
   // deletePet(id: number){
   //   this.listingService.deleteListPet(id).subscribe((result) => console.log('finished'))
   // }
-}
-export interface Pet {
-  id: number;
-  owner_id: string;
-  name: string;
-  type: string;
-  img_url: string;
-  // breeds: string[];
-  breed: string;
-  age: number;
-  ownership_length: number;
+  createURL(url: string): string {
+    return this.baseUrl + url;
+  }
 }

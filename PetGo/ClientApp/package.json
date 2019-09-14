@@ -2,9 +2,12 @@
   "name": "PetGo",
   "version": "0.0.0",
   "scripts": {
+    "deploy": "docker build . && cd .. && heroku git:remote -a thawing-everglades-61111 && heroku container:push web && heroku container:release web",
+    "install-dev": "npm install && cd .. && dotnet build && dotnet run",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build --prod": "ng build --prod",
     "build:ssr": "ng run PetGo:server:dev",
     "test": "ng test",
     "lint": "ng lint",

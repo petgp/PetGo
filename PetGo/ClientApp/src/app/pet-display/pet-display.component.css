@@ -8,21 +8,17 @@
   position: relative;
   float: right !important;
 }
-
 .mb-3 {
-
   justify-content: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   min-width: 370px !important;
 }
-
 .card-body > p > img {
   width: 120px;
   border-radius: 50%;
 }
-
 .card {
   border-color: #6a6e71;
   background-color: floralwhite;

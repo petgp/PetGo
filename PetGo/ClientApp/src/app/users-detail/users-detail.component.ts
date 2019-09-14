@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from '../message.service';
+import { MessageService } from '../shared/message.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService, Users } from '../shared/user.service';
@@ -38,7 +38,6 @@ export class UsersDetailComponent implements OnInit {
     this.userService.updateUser(this.user).subscribe(users => {
       this.router.navigateByUrl('/users');
     });
-
   }
   goBack(): void {
     this.location.back();

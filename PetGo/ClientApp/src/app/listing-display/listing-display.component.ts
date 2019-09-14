@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pet } from '../pet-display/pet-display.component';
-import { MessageService } from '../message.service';
+import { MessageService } from '../shared/message.service';
 import validUrl from 'valid-url';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listing-display',
@@ -11,8 +11,6 @@ import {Router} from '@angular/router'
   styleUrls: ['./listing-display.component.css']
 })
 export class ListingDisplayComponent {
-
-  
   public listingsWithPets: ListingWithPet[];
 
   constructor(private router: Router, http: HttpClient, private messageService: MessageService, @Inject('BASE_URL') baseUrl: string) {
@@ -27,8 +25,7 @@ export class ListingDisplayComponent {
     }
     return './default-pet-icon.png';
   }
-
-  find(id){
+  find(id) {
     this.router.navigate([`/listings/${id}`]);
   }
 }

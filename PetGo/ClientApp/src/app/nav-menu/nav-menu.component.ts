@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from '../message.service';
 import { UserService } from '../shared/user.service';
 @Component({
   selector: 'app-nav-menu',
@@ -8,13 +7,11 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  constructor(private router: Router, public service: UserService, private messageService: MessageService) { }
+  constructor(private router: Router, public service: UserService) { }
   isExpanded = false;
-
   collapse() {
     this.isExpanded = false;
   }
-
   toggle() {
     this.isExpanded = !this.isExpanded;
   }

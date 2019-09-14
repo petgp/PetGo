@@ -1,14 +1,15 @@
-
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MessageService } from '../message.service';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { MessageService } from './message.service';
+import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { JwtHelper } from '../helper';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
   public isLoggedIn = false;
   constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private jwt: JwtHelper) {
@@ -39,7 +40,6 @@ export class UserService {
       }
     }
   }
-
   // sign up method
   register() {
     const body = {
@@ -48,7 +48,6 @@ export class UserService {
       Password: this.formModel.value.Passwords.Password,
     };
     return this.http.post('/api/ApplicationUser/Register', body);
-
   }
   login(formData) {
     return this.http.post('/api/ApplicationUser/Login', formData);

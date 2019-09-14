@@ -8,7 +8,6 @@ import { UserService, Users } from '../shared/user.service';
 })
 export class UserDisplayComponent {
   public users: Users[];
-  // tslint:disable-next-line: max-line-length
   constructor(private userService: UserService) {
     this.userService.getUsers().subscribe(users => this.users = users);
   }

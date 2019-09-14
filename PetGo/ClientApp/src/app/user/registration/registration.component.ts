@@ -1,19 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { Router } from '@angular/router';
-import { MessageService } from '../../message.service';
+import { MessageService } from '../../shared/message.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
 
   constructor(public service: UserService, private router: Router, private messageService: MessageService) { }
-
-  ngOnInit() {
-  }
-
   onSubmit(form) {
     const user = {
       Email: form.value.Email,
@@ -48,7 +44,6 @@ export class RegistrationComponent implements OnInit {
       }
     );
   }
-
   login(data) {
     this.service.login(data).subscribe(
       (res: any) => {

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
-import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { UserDisplayComponent } from './user-display/user-display.component';
 import { UsersDetailComponent } from './users-detail/users-detail.component';
@@ -15,6 +14,13 @@ import { ListingCreationComponent } from './listing-creation/listing-creation.co
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: 'user', component: UserComponent,
+    children: [
+      { path: 'registration', component: RegistrationComponent },
+      { path: 'login', component: LoginComponent },
+    ]
+  },
   { path: '', redirectTo: '/users', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegistrationComponent },
@@ -27,9 +33,9 @@ const routes: Routes = [
   { path: 'listing-creation', component: ListingCreationComponent, canActivate: [AuthGuard] },
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

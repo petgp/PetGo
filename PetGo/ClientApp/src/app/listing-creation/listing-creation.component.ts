@@ -1,31 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ListingService } from '../shared/listing.service';
 import { Router } from '@angular/router';
 import { JwtHelper } from '../helper';
-import { MessageService } from '../message.service';
+import { MessageService } from '../shared/message.service';
 @Component({
   selector: 'app-listing-creation',
   templateUrl: './listing-creation.component.html',
   styleUrls: ['./listing-creation.component.css']
 })
-export class ListingCreationComponent implements OnInit {
+export class ListingCreationComponent {
 
   constructor(public service: ListingService, private router: Router, private jwt: JwtHelper, private messageService: MessageService) { }
 
-  ngOnInit() {
-  }
-
-
   onSubmit(form) {
     let decoded;
-    if(localStorage.getItem('token') !== null){
-    const token = localStorage.getItem('token')
-    decoded = this.jwt.decodeToken(token);
-    }else{
-    	return 'Fuck off'
-    	}
-
-    const UserId = decoded
+    if (localStorage.getItem('token') !== null) {
+      const token = localStorage.getItem('token');
+      decoded = this.jwt.decodeToken(token);
+    } else {
+      return 'Fuck off';
+    }
+    const UserId = decoded;
     const pet = {
       Owner_id: UserId,
       Name: form.value.PetName,
@@ -43,7 +38,6 @@ export class ListingCreationComponent implements OnInit {
       Title: form.value.Title,
       Description: form.value.Description
     };
-
     this.service.CreatePet(pet).subscribe(result => {
       listing.PetId = result.id;
       this.messageService.log('CreatePet');

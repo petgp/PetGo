@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ListingService, Listing, ListingWithPet, Pet } from "../shared/listing.service";
 import validUrl from 'valid-url';
 
-
 @Component({
   selector: "app-pet-detail",
   templateUrl: "./pet-detail.component.html",
@@ -12,6 +11,7 @@ import validUrl from 'valid-url';
 export class PetDetailComponent implements OnInit {
   @Input() pet: Pet;
   @Input() list: Listing;
+  listingWithPet: ListingWithPet;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,14 +25,12 @@ export class PetDetailComponent implements OnInit {
       this.pet = result.pet;
     });
   }
-
   public validImg(img_url: string): string {
     if (validUrl.isUri(img_url)) {
       return img_url;
     }
     return './default-pet-icon.png';
   }
-
   save(): void {
     this.listingService.updateMyPet(this.pet).subscribe(result => {
       this.list.petId = result.id;

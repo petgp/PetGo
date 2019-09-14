@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from '../message.service';
+import { MessageService } from '../shared/message.service';
 import validUrl from 'valid-url';
 import { JwtHelper } from '../helper';
-import { ListingService, Pet } from '../shared/listing.service';
-import { Observable } from 'rxjs';
+import { Pet } from '../shared/listing.service';
 
 @Component({
   selector: 'app-pet-display',
@@ -15,28 +14,23 @@ export class PetDisplayComponent {
 
   public pets: Pet[];
 
-
-  constructor(
-    http: HttpClient,
+  constructor(http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
     private messageService: MessageService,
-    private jwt: JwtHelper,
-    private listingService: ListingService) {
-    // const token = localStorage.getItem('token');
-    // const decoded = this.jwt.decodeToken(token);
-    http.get<Pet[]>(this.createURL('api/pets')).subscribe(result => {
-      this.pets = result;
+    private jwt: JwtHelper) {
+    const token = localStorage.getItem('token');
+    const decoded = this.jwt.decodeToken(token);
+    http.get<Pet[]>(baseUrl + 'api/pets').subscribe(result => {
+      this.pets = result.filter(res => res.owner_id === decoded);
       this.messageService.log('FetchedPets');
     }, error => this.messageService.handleError('getPets', error));
   }
-
   public validImg(img_url: string): string {
     if (validUrl.isUri(img_url)) {
       return img_url;
     }
     return './default-pet-icon.png';
   }
-
   // deletePet(id: number){
   //   this.listingService.deleteListPet(id).subscribe((result) => console.log('finished'))
   // }

@@ -1,10 +1,7 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MessageService } from '../message.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { ListingService, Listing } from '../shared/listing.service';
 import { Users, UserService } from '../shared/user.service';
-
 
 @Component({
   selector: 'app-listing-detail',

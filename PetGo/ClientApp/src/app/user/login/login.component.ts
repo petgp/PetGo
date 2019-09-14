@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from "../../shared/user.service";
 import { Router } from '@angular/router';
-import { MessageService } from '../../message.service';
+import { MessageService } from '../../shared/message.service';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +11,15 @@ import { MessageService } from '../../message.service';
 })
 export class LoginComponent implements OnInit {
   formModel = {
-    // Username: '',
     Email: '',
     Password: ''
   };
   constructor(private service: UserService, private router: Router, private messageService: MessageService) { }
-
   ngOnInit() {
     if (localStorage.getItem('token') != null) {
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/login');
     }
   }
-
   onSubmit(form: NgForm) {
     this.service.login(form.value).subscribe(
       (res: any) => {
@@ -42,5 +39,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
 }

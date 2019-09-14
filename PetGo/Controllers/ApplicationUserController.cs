@@ -91,14 +91,13 @@ namespace PetGo.Controllers
 
     public async Task<Object> PostApplicationUser(ApplicationUserModel model)
     {
-      var applicationUser = new ApplicationUser()
-      {
-        UserName = model.UserName,
-        Email = model.Email,
-      };
-
       try
       {
+        var applicationUser = new ApplicationUser()
+        {
+          UserName = model.UserName,
+          Email = model.Email,
+        };
         var result = await _userManager.CreateAsync(applicationUser, model.Password);
         return Ok(result);
       }

@@ -1,16 +1,15 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from '../message.service';
+import { MessageService } from '../shared/message.service';
 import validUrl from 'valid-url';
 import { Router } from '@angular/router';
-import { Listing, ListingWithPet } from '../shared/listing.service';
+import { ListingWithPet } from '../shared/listing.service';
 @Component({
   selector: 'app-listing-display',
   templateUrl: './listing-display.component.html',
   styleUrls: ['./listing-display.component.css']
 })
 export class ListingDisplayComponent {
-
 
   public listingsWithPets: ListingWithPet[];
 

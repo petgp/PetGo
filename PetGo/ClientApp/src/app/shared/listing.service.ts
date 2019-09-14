@@ -1,8 +1,7 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MessageService } from '../message.service';
+import { MessageService } from '../shared/message.service';
 import { Observable } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -36,6 +35,7 @@ export interface ListingWithPet {
 @Injectable({
   providedIn: 'root'
 })
+
 export class ListingService {
 
   public pet: Pet;
@@ -55,13 +55,8 @@ export class ListingService {
     Img_url: "",
     Description: ""
   });
-
-
-
   CreatePet(pet) {
-    //return this.http.post(this.BaseURL + '/pets', pet);
-    return this.http.post<Pet>(this.createURL('api/pets'), pet);
-
+    return this.http.post<Pet>('/api/pets', pet);
   }
   CreateListing(listing) {
     return this.http.post<Listing>(this.createURL('api/listings'), listing);
@@ -71,30 +66,23 @@ export class ListingService {
   }
   getSingleListing(id: number): Observable<Listing> {
     return this.http.get<Listing>('/api/listings/' + id).pipe(tap(_ => this.messageService.log("FetchedListing " + id)),
-      catchError(this.messageService.handleError<Listing>("foundlisting"))
-    )
+      catchError(this.messageService.handleError<Listing>("Fetchlisting"))
+    );
   }
-
-
   getSinglePet(id: number) {
-
-    return this.http.get(`/api/pets/${id}`).pipe(tap(_ => this.messageService.log("FetchedListing " + id)), catchError(this.messageService.handleError("found Listing")))
+    return this.http.get(`/api/pets/${id}`).pipe(
+      tap(_ => this.messageService.log("FetchedListing " + id)),
+      catchError(this.messageService.handleError("FetchListing")));
   }
-
   updateMyPet(payload: Pet): Observable<Pet> {
-    console.log('pet', payload.id);
-
-    return this.http.put<Pet>(`/api/pets/update`, payload)
+    return this.http.put<Pet>(`/api/pets/update`, payload);
   }
   updateListing(payload: Listing): Observable<Listing> {
-    console.log('list', payload)
     return this.http.put<Listing>('api/listings/update', payload);
   }
-
   // deleteListPet(id: number): Observable<List> {
   //   return this.http.delete<List>(`api/pets/${id}`)
   // }
-
 }
 
 

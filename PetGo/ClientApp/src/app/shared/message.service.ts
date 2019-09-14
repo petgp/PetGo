@@ -6,27 +6,18 @@ class Message {
   public message: string;
   public dateTime: string;
 }
-
 @Injectable({
   providedIn: 'root'
 })
-
 export class MessageService {
   constructor() { }
   private delegates: any[] = [];
   public messages: object[] = [];
-  public log(message: string) {
-    this.addMessage(`PetGoService: ${message}`);
-  }
-  public handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
   public addDelegate(delegate: any): void {
     this.delegates.push(delegate);
+  }
+  public log(message: string) {
+    this.addMessage(`PetGoService: ${message}`);
   }
   private addMessage(message: string): void {
     this.messages.push(this.createMessage(message));
@@ -36,6 +27,13 @@ export class MessageService {
   }
   public clear(): void {
     this.messages = [];
+  }
+  public handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
   private createMessage(message: string): object {
     const tempMessage = new Message();
